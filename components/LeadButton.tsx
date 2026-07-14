@@ -1,18 +1,21 @@
-import { WHATSAPP_URL } from "@/lib/constants";
+"use client";
 
-export function WhatsAppButton({
+import { useLeadModal } from "@/components/LeadModal";
+
+export function LeadButton({
   arrow = false,
   className = "",
 }: {
   arrow?: boolean;
   className?: string;
 }) {
+  const { openModal } = useLeadModal();
+
   return (
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      type="button"
       className={`primary-button ${className}`}
+      onClick={openModal}
     >
       <span>Оставить заявку{arrow ? " " : ""}</span>
       {arrow && (
@@ -20,6 +23,6 @@ export function WhatsAppButton({
           →
         </span>
       )}
-    </a>
+    </button>
   );
 }

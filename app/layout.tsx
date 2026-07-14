@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { LenisProvider } from "@/components/LenisProvider";
+import { LeadModalProvider } from "@/components/LeadModal";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,7 +49,9 @@ export default function RootLayout({
       className={`${inter.variable} ${jetBrainsMono.variable}`}
     >
       <body>
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <LeadModalProvider>{children}</LeadModalProvider>
+        </LenisProvider>
       </body>
     </html>
   );

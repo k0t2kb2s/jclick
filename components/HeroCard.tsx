@@ -28,16 +28,16 @@ export function HeroCard() {
   const reduceMotion = useReducedMotion();
   const rawRotateX = useMotionValue(0);
   const rawRotateY = useMotionValue(0);
-  const rotateX = useSpring(rawRotateX, { stiffness: 150, damping: 20 });
-  const rotateY = useSpring(rawRotateY, { stiffness: 150, damping: 20 });
+  const rotateX = useSpring(rawRotateX, { stiffness: 180, damping: 26 });
+  const rotateY = useSpring(rawRotateY, { stiffness: 180, damping: 26 });
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (reduceMotion) return;
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    rawRotateX.set(y * -9);
-    rawRotateY.set(x * 11);
+    rawRotateX.set(y * -3.5);
+    rawRotateY.set(x * 4.5);
   };
 
   const resetTilt = () => {
@@ -51,12 +51,11 @@ export function HeroCard() {
       role="img"
       aria-label="Тёмная NFC-карта jclick"
     >
-      <div className="hero-card-orbit" aria-hidden="true" />
-      <motion.div
-        className="hero-card-float"
-        animate={reduceMotion ? undefined : { y: [0, -12, 0] }}
-        transition={{ duration: 5.8, ease: "easeInOut", repeat: Infinity }}
-      >
+      <div className="hero-card-stage" aria-hidden="true">
+        <div className="hero-stage-grid" />
+        <div className="hero-stage-halo" />
+        <div className="hero-stage-corner hero-stage-corner-top" />
+        <div className="hero-stage-corner hero-stage-corner-bottom" />
         <motion.div
           className="hero-card-shell"
           style={{ rotateX, rotateY, transformPerspective: 1100 }}
@@ -71,10 +70,17 @@ export function HeroCard() {
             <span className="hero-card-nfc">
               <NfcWaves />
             </span>
-            <span className="hero-card-hint">• ПРИЛОЖИТЕ ТЕЛЕФОН</span>
+            <span className="hero-card-chip" />
           </div>
+          <span className="hero-card-glint" />
         </motion.div>
-      </motion.div>
+        <div className="hero-stage-shadow" />
+        <div className="hero-stage-signal">
+          <span />
+          <span />
+          <span />
+        </div>
+      </div>
     </figure>
   );
 }

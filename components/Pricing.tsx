@@ -1,6 +1,6 @@
 import { Eyebrow } from "@/components/Eyebrow";
+import { LeadButton } from "@/components/LeadButton";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const plans = [
   {
@@ -66,7 +66,7 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <WhatsAppButton className="pricing-button" />
+              <LeadButton className="pricing-button" />
             </StaggerItem>
           ))}
         </Stagger>

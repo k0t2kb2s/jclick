@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Eyebrow } from "@/components/Eyebrow";
 import { HeroCard } from "@/components/HeroCard";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { LeadButton } from "@/components/LeadButton";
 
 const headline = "Гость тапнул — оставил отзыв.";
 
@@ -27,7 +27,9 @@ export function Hero() {
             {words.map((word, index) => (
               <span className="hero-word-clip" aria-hidden="true" key={word}>
                 <motion.span
-                  className="hero-word"
+                  className={`hero-word ${
+                    index === words.length - 1 ? "hero-title-accent" : ""
+                  }`}
                   initial={reduceMotion ? false : { y: "115%", opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{
@@ -56,7 +58,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: reduceMotion ? 0 : 0.7 }}
           >
-            <WhatsAppButton arrow />
+            <LeadButton arrow />
           </motion.div>
         </div>
         <motion.div

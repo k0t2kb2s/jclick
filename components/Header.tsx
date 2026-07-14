@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/Logo";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { LeadButton } from "@/components/LeadButton";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,7 +19,7 @@ export function Header() {
         <a href="#top" aria-label="jclick" className="header-logo">
           <Logo compact />
         </a>
-        <WhatsAppButton arrow className="header-cta" />
+        <LeadButton arrow className="header-cta" />
       </div>
     </header>
   );

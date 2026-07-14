@@ -1,6 +1,6 @@
+import { LeadButton } from "@/components/LeadButton";
 import { Logo } from "@/components/Logo";
 import { Reveal } from "@/components/Motion";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export function CTA() {
   return (
@@ -14,7 +14,7 @@ export function CTA() {
             Протестируете на гостях пару дней. Зашло — соберём комплект. Ничего
             не теряете.
           </p>
-          <WhatsAppButton arrow />
+          <LeadButton arrow />
         </Reveal>
       </div>
     </section>
