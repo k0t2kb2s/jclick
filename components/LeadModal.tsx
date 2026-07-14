@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 import {
   createContext,
@@ -14,6 +14,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 type LeadModalContextValue = {
   openModal: (quantity?: LeadQuantity) => void;
@@ -72,7 +73,7 @@ function SuccessState({
   titleId: string;
   descriptionId: string;
 }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <motion.div
@@ -161,7 +162,7 @@ function LeadDialog({
   onClose: () => void;
   initialQuantity: LeadQuantity;
 }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const titleId = useId();
   const descriptionId = useId();
   const firstInputRef = useRef<HTMLInputElement>(null);
@@ -295,7 +296,10 @@ function LeadDialog({
                       name="phone"
                       autoComplete="tel"
                       inputMode="tel"
+                      pattern={"[+0-9 .\\(\\)\\-]{7,40}"}
+                      minLength={7}
                       maxLength={40}
+                      title="Введите номер телефона цифрами"
                       required
                     />
                   </label>
@@ -346,7 +350,7 @@ function LeadDialog({
                 </div>
                 <a
                   className="lead-whatsapp"
-                  href="https://wa.me/77067010125"
+                  href="https://wa.me/77067010125?text=Здравствуйте!%20Хочу%20попробовать%20карту%20jclick%20для%20отзывов."
                   target="_blank"
                   rel="noopener noreferrer"
                 >

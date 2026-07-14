@@ -10,7 +10,13 @@ export function Footer() {
           @jcl1ck в Instagram
         </a>
         <span aria-hidden="true">·</span>
-        <a href="https://wa.me/77067010125">WhatsApp +7 706 701 01 25</a>
+        <a
+          href="https://wa.me/77067010125?text=Здравствуйте!%20Хочу%20попробовать%20карту%20jclick%20для%20отзывов."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp +7 706 701 01 25
+        </a>
       </div>
     </footer>
   );

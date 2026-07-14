@@ -1,14 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Eyebrow } from "@/components/Eyebrow";
 import { HeroCard } from "@/components/HeroCard";
 import { LeadButton } from "@/components/LeadButton";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const headline = "Гость тапнул - оставил отзыв.";
 
 export function Hero() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const words = headline.split(" ");
 
   return (

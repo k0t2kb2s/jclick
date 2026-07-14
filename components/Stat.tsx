@@ -5,17 +5,17 @@ import {
   motion,
   useInView,
   useMotionValue,
-  useReducedMotion,
   useTransform,
 } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 export function Stat() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.45 });
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const value = useMotionValue(reduceMotion ? 40 : 0);
   const rounded = useTransform(value, (latest) => Math.round(latest));
 

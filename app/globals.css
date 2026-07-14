@@ -2067,6 +2067,10 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+
   html:focus-within {
     scroll-behavior: auto;
   }

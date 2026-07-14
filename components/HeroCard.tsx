@@ -4,10 +4,10 @@ import dynamic from "next/dynamic";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useSpring,
 } from "framer-motion";
 import { Suspense, type PointerEvent as ReactPointerEvent } from "react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const CardScene = dynamic(() => import("@/components/HeroCardScene"), {
   ssr: false,
@@ -25,7 +25,7 @@ function NfcWaves() {
 }
 
 export function HeroCard() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const rawRotateX = useMotionValue(0);
   const rawRotateY = useMotionValue(0);
   const rotateX = useSpring(rawRotateX, { stiffness: 180, damping: 26 });

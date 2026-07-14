@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 type MotionChildren = {
   children: ReactNode;
@@ -13,7 +14,7 @@ export function Reveal({
   className,
   delay = 0,
 }: MotionChildren & { delay?: number }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <motion.div
@@ -39,7 +40,7 @@ const container: Variants = {
 };
 
 export function Stagger({ children, className }: MotionChildren) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <motion.div
@@ -55,7 +56,7 @@ export function Stagger({ children, className }: MotionChildren) {
 }
 
 export function StaggerItem({ children, className }: MotionChildren) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <motion.div

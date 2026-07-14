@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const demoSteps = [
   {
@@ -37,7 +38,7 @@ function DemoCard() {
 }
 
 function DemoPhone() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <motion.div
@@ -79,7 +80,7 @@ function DemoPhone() {
 }
 
 export function Demo() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <section className="light-section section-shell demo-section">
