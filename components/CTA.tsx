@@ -9,10 +9,10 @@ export function CTA() {
       <div className="site-container cta-inner">
         <Reveal>
           <Logo className="cta-logo" />
-          <h2 className="cta-title">Оставим карту на пробу.</h2>
+          <h2 className="cta-title">Попробуйте карту на своих гостях.</h2>
           <p className="cta-text">
-            Протестируете на гостях пару дней. Зашло — соберём комплект. Ничего
-            не теряете.
+            Оставим карту на пару дней. Понравится - соберём комплект. Ничего не
+            теряете.
           </p>
           <LeadButton arrow />
         </Reveal>

@@ -10,7 +10,7 @@ const items = [
   },
   {
     title: "Настройка и гарантия",
-    text: "Пропишем вашу ссылку 2GIS. Брак — бесплатно меняем.",
+    text: "Пропишем вашу ссылку 2GIS. Если будет брак - бесплатно заменим.",
     icon: ShieldCheck,
   },
   {
@@ -20,7 +20,7 @@ const items = [
   },
   {
     title: "Уникальный дизайн под бренд",
-    text: "Оформим карту в стиле вашего заведения — бесплатно при любом заказе.",
+    text: "Оформим карту в стиле вашего заведения. Дизайн бесплатный при любом заказе.",
     icon: Palette,
     badge: "бесплатно",
   },
@@ -33,9 +33,9 @@ export function Included() {
       <div className="site-container">
         <Reveal className="section-heading section-heading-wide">
           <Eyebrow>ЧТО ВХОДИТ</Eyebrow>
-          <h2 className="section-title">Готовое решение под ключ</h2>
+          <h2 className="section-title">Всё для запуска с первого дня</h2>
           <p className="section-subtitle">
-            Не просто карта — всё, чтобы отзывы пошли с первого дня.
+            Карта, настройка, дизайн и документы. Можно сразу ставить на стол.
           </p>
         </Reveal>
         <Stagger className="included-grid">

@@ -1,10 +1,19 @@
 import { Eyebrow } from "@/components/Eyebrow";
 import { LeadButton } from "@/components/LeadButton";
+import type { LeadQuantity } from "@/components/LeadModal";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 
-const plans = [
+type Plan = {
+  range: LeadQuantity;
+  price: string;
+  suffix?: string;
+  popular?: boolean;
+  features: readonly string[];
+};
+
+const plans: readonly Plan[] = [
   {
-    range: "1–9 карт",
+    range: "1-9 карт",
     price: "3 000 ₸",
     suffix: "за карту",
     features: [
@@ -14,7 +23,7 @@ const plans = [
     ],
   },
   {
-    range: "10–49 карт",
+    range: "10-49 карт",
     price: "2 600 ₸",
     suffix: "за карту",
     popular: true,
@@ -29,7 +38,7 @@ const plans = [
     price: "договорная",
     features: [
       "Кастом с вашим логотипом",
-      "Предоплата 30–50%, срок 8–20 дней",
+      "Предоплата 30-50%, срок 8-20 дней",
       "Договор поставки",
     ],
   },
@@ -41,9 +50,9 @@ export function Pricing() {
       <div className="site-container">
         <Reveal className="section-heading section-heading-wide">
           <Eyebrow>ЦЕНЫ</Eyebrow>
-          <h2 className="section-title">Разовая покупка, не подписка</h2>
+          <h2 className="section-title">Платите один раз. Без подписки</h2>
           <p className="section-subtitle">
-            Окупается с первых пары гостей, которых приведут отзывы.
+            Окупается благодаря первым гостям, которых приведут новые отзывы.
           </p>
         </Reveal>
         <Stagger className="pricing-grid">
@@ -66,7 +75,7 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <LeadButton className="pricing-button" />
+              <LeadButton className="pricing-button" quantity={plan.range} />
             </StaggerItem>
           ))}
         </Stagger>

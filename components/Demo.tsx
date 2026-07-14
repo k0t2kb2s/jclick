@@ -88,7 +88,7 @@ export function Demo() {
         <Reveal className="section-heading section-heading-wide">
           <Eyebrow dark>ЖИВОЕ ДЕМО</Eyebrow>
           <h2 className="section-title light-title">
-            Дайте гостю тапнуть — сами всё увидите
+            Один тап - и страница отзыва уже открыта
           </h2>
         </Reveal>
         <div className="demo-grid">

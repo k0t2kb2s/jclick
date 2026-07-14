@@ -5,11 +5,11 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 const problems = [
   {
     title: "Дома не вспоминает",
-    text: "«Оставлю потом» = не оставит никогда.",
+    text: "Гость думает: «оставлю потом», а дома уже забывает.",
     icon: Clock3,
   },
   {
-    title: "QR — это лень",
+    title: "QR - это лишние действия",
     text: "Достать камеру, навести, подождать. Половина бросает.",
     icon: ScanLine,
   },
@@ -28,7 +28,7 @@ export function Problem() {
         <Reveal className="section-heading section-heading-wide">
           <Eyebrow>ПРОБЛЕМА</Eyebrow>
           <h2 className="section-title">
-            Довольный гость уходит — и не оставляет отзыв.
+            Гость доволен, но отзыв так и не появляется.
           </h2>
         </Reveal>
         <Stagger className="three-card-grid">

@@ -1,13 +1,16 @@
 "use client";
 
 import { useLeadModal } from "@/components/LeadModal";
+import type { LeadQuantity } from "@/components/LeadModal";
 
 export function LeadButton({
   arrow = false,
   className = "",
+  quantity,
 }: {
   arrow?: boolean;
   className?: string;
+  quantity?: LeadQuantity;
 }) {
   const { openModal } = useLeadModal();
 
@@ -15,7 +18,7 @@ export function LeadButton({
     <button
       type="button"
       className={`primary-button ${className}`}
-      onClick={openModal}
+      onClick={() => openModal(quantity)}
     >
       <span>Оставить заявку{arrow ? " " : ""}</span>
       {arrow && (

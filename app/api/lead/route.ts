@@ -54,8 +54,8 @@ export async function POST(request: Request) {
     "",
     `Имя: ${name}`,
     `Телефон: ${phone}`,
-    `Заведение: ${venue || "—"}`,
-    `Количество карт: ${quantity || "—"}`,
+    `Заведение: ${venue || "не указано"}`,
+    `Количество карт: ${quantity || "не указано"}`,
   ].join("\n");
 
   try {

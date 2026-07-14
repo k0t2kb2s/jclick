@@ -8,11 +8,11 @@ const objections = [
   },
   {
     title: "«Уже есть отзывы»",
-    text: "Отлично, база есть. Но это не разово — 2GIS выше ставит тех, у кого свежее. Карта держит вас наверху.",
+    text: "Отлично, база есть. Но отзывы должны появляться регулярно. 2GIS выше ставит тех, у кого они свежее. Карта помогает держаться наверху.",
   },
   {
     title: "«Сейчас не до этого»",
-    text: "Без проблем. Оставлю карту и номер — протестируете, когда будет минута. Ничего не теряете.",
+    text: "Без проблем. Оставим карту и номер. Протестируете, когда будет минута. Ничего не теряете.",
   },
 ];
 
@@ -23,7 +23,7 @@ export function Objections() {
       <div className="site-container">
         <Reveal className="section-heading">
           <Eyebrow>ЧАСТЫЕ СОМНЕНИЯ</Eyebrow>
-          <h2 className="section-title">И что мы на это отвечаем</h2>
+          <h2 className="section-title">Отвечаем на частые вопросы</h2>
         </Reveal>
         <Stagger className="three-card-grid">
           {objections.map((objection) => (

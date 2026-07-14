@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { LenisProvider } from "@/components/LenisProvider";
 import { LeadModalProvider } from "@/components/LeadModal";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,10 +21,10 @@ const description =
   "NFC-карты, которые превращают каждого гостя в свежий отзыв на 2GIS. Без приложений. Быстрее QR.";
 
 export const metadata: Metadata = {
-  title: "jclick — NFC-карты для отзывов на 2GIS",
+  title: "jclick - NFC-карты для отзывов на 2GIS",
   description,
   openGraph: {
-    title: "jclick — NFC-карты для отзывов на 2GIS",
+    title: "jclick - NFC-карты для отзывов на 2GIS",
     description,
     locale: "ru_RU",
     type: "website",
@@ -50,7 +51,10 @@ export default function RootLayout({
     >
       <body>
         <LenisProvider>
-          <LeadModalProvider>{children}</LeadModalProvider>
+          <LeadModalProvider>
+            <ScrollProgress />
+            {children}
+          </LeadModalProvider>
         </LenisProvider>
       </body>
     </html>

@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { HeroCard } from "@/components/HeroCard";
 import { LeadButton } from "@/components/LeadButton";
 
-const headline = "Гость тапнул — оставил отзыв.";
+const headline = "Гость тапнул - оставил отзыв.";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();

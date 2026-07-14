@@ -22,7 +22,7 @@ export function Comparison() {
       <div className="site-container">
         <Reveal className="section-heading">
           <Eyebrow>СРАВНЕНИЕ</Eyebrow>
-          <h2 className="section-title">Карта jclick против QR-кода</h2>
+          <h2 className="section-title">Почему jclick проще QR-кода</h2>
         </Reveal>
         <Stagger className="comparison-grid">
           <StaggerItem className="comparison-card comparison-card-qr">

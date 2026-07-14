@@ -16,10 +16,11 @@ import {
 } from "react";
 
 type LeadModalContextValue = {
-  openModal: () => void;
+  openModal: (quantity?: LeadQuantity) => void;
 };
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
+export type LeadQuantity = "1-9 карт" | "10-49 карт" | "50+ карт";
 
 const LeadModalContext = createContext<LeadModalContextValue | null>(null);
 
@@ -33,6 +34,34 @@ const burstPoints = [
   [-70, 0],
   [-50, -50],
 ];
+
+const flyingCards = [
+  { x: -150, y: -118, rotate: -72, delay: 0.03 },
+  { x: -82, y: -156, rotate: -36, delay: 0.08 },
+  { x: 12, y: -172, rotate: 18, delay: 0.01 },
+  { x: 105, y: -142, rotate: 58, delay: 0.11 },
+  { x: 158, y: -72, rotate: 92, delay: 0.05 },
+  { x: 156, y: 28, rotate: 132, delay: 0.14 },
+  { x: 96, y: 108, rotate: 168, delay: 0.07 },
+  { x: -2, y: 126, rotate: 205, delay: 0.12 },
+  { x: -105, y: 102, rotate: 242, delay: 0.02 },
+  { x: -160, y: 30, rotate: 286, delay: 0.1 },
+];
+
+function WhatsAppIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path
+        d="M27.1 15.7A11.1 11.1 0 0 1 10.7 25.5L5 27l1.5-5.5A11.1 11.1 0 1 1 27.1 15.7Z"
+        fill="currentColor"
+      />
+      <path
+        d="M11.5 9.8c.3-.7.6-.7 1-.7h.8c.2 0 .5.1.6.5l1.1 2.6c.1.3.1.5-.1.8l-.8 1c-.2.2-.2.4 0 .7 1 1.8 2.4 3.2 4.3 4.1.3.1.5.1.7-.1l1.2-1.5c.2-.3.5-.3.8-.2l2.4 1.1c.3.1.5.3.5.6 0 .4-.2 2-1.2 2.7-.8.6-1.9.9-3 .6-1.4-.3-3.3-1-5.5-2.9-2.6-2.2-4.2-5-4.7-6.6-.3-1.1 0-2 .4-2.7Z"
+        fill="#0D130F"
+      />
+    </svg>
+  );
+}
 
 function SuccessState({
   onClose,
@@ -53,6 +82,35 @@ function SuccessState({
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="success-animation" aria-hidden="true">
+        {flyingCards.map((card, index) => (
+          <motion.span
+            className="success-flying-card"
+            key={`${card.x}-${card.y}`}
+            initial={
+              reduceMotion
+                ? false
+                : { opacity: 0, x: 0, y: 0, rotate: 0, scale: 0.25 }
+            }
+            animate={
+              reduceMotion
+                ? { opacity: 0 }
+                : {
+                    opacity: [0, 1, 1, 0],
+                    x: [0, card.x, card.x * 1.08],
+                    y: [0, card.y, card.y + 115],
+                    rotate: [0, card.rotate, card.rotate + 48],
+                    scale: [0.25, 1, 0.78],
+                  }
+            }
+            transition={{
+              duration: 1.65,
+              delay: card.delay,
+              ease: [0.22, 0.72, 0.2, 1],
+            }}
+          >
+            <span>{index % 3 === 0 ? "j" : ""}</span>
+          </motion.span>
+        ))}
         {burstPoints.map(([x, y], index) => (
           <motion.span
             className="success-particle"
@@ -96,7 +154,13 @@ function SuccessState({
   );
 }
 
-function LeadDialog({ onClose }: { onClose: () => void }) {
+function LeadDialog({
+  onClose,
+  initialQuantity,
+}: {
+  onClose: () => void;
+  initialQuantity: LeadQuantity;
+}) {
   const reduceMotion = useReducedMotion();
   const titleId = useId();
   const descriptionId = useId();
@@ -208,7 +272,7 @@ function LeadDialog({ onClose }: { onClose: () => void }) {
               <p className="lead-kicker">ЗАЯВКА · JCLICK</p>
               <h2 id={titleId}>Оставить заявку</h2>
               <p className="lead-description" id={descriptionId}>
-                Оставьте контакты — свяжемся с вами и всё настроим.
+                Оставьте имя и телефон. Мы свяжемся с вами и всё настроим.
               </p>
 
               <form className="lead-form" onSubmit={handleSubmit}>
@@ -247,9 +311,9 @@ function LeadDialog({ onClose }: { onClose: () => void }) {
                 </label>
                 <label className="lead-field">
                   <span>Количество карт</span>
-                  <select name="quantity" defaultValue="1–9 карт">
-                    <option>1–9 карт</option>
-                    <option>10–49 карт</option>
+                  <select name="quantity" defaultValue={initialQuantity}>
+                    <option>1-9 карт</option>
+                    <option>10-49 карт</option>
                     <option>50+ карт</option>
                   </select>
                 </label>
@@ -275,6 +339,26 @@ function LeadDialog({ onClose }: { onClose: () => void }) {
                     </>
                   )}
                 </button>
+                <div className="lead-or" aria-hidden="true">
+                  <span />
+                  или
+                  <span />
+                </div>
+                <a
+                  className="lead-whatsapp"
+                  href="https://wa.me/77067010125"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="lead-whatsapp-icon">
+                    <WhatsAppIcon />
+                  </span>
+                  <span className="lead-whatsapp-copy">
+                    <strong>Написать в WhatsApp</strong>
+                    <small>+7 706 701 01 25</small>
+                  </span>
+                  <span className="lead-whatsapp-arrow" aria-hidden="true">↗</span>
+                </a>
                 <p className="lead-privacy">
                   Нажимая кнопку, вы соглашаетесь на обработку данных.
                 </p>
@@ -302,9 +386,12 @@ function LeadDialog({ onClose }: { onClose: () => void }) {
 
 export function LeadModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [initialQuantity, setInitialQuantity] =
+    useState<LeadQuantity>("1-9 карт");
   const triggerRef = useRef<HTMLElement | null>(null);
-  const openModal = useCallback(() => {
+  const openModal = useCallback((quantity: LeadQuantity = "1-9 карт") => {
     triggerRef.current = document.activeElement as HTMLElement | null;
+    setInitialQuantity(quantity);
     setIsOpen(true);
   }, []);
   const closeModal = useCallback(() => {
@@ -330,7 +417,14 @@ export function LeadModalProvider({ children }: { children: ReactNode }) {
   return (
     <LeadModalContext.Provider value={{ openModal }}>
       {children}
-      <AnimatePresence>{isOpen && <LeadDialog onClose={closeModal} />}</AnimatePresence>
+      <AnimatePresence>
+        {isOpen && (
+          <LeadDialog
+            onClose={closeModal}
+            initialQuantity={initialQuantity}
+          />
+        )}
+      </AnimatePresence>
     </LeadModalContext.Provider>
   );
 }

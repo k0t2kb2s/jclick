@@ -5,7 +5,7 @@ const steps = [
   {
     number: "01",
     title: "Гость подносит телефон",
-    text: "Карта на столе рядом с табличкой «оставьте отзыв». Тап — и всё.",
+    text: "Карта на столе рядом с табличкой «оставьте отзыв». Тап - и всё.",
   },
   {
     number: "02",
@@ -25,7 +25,7 @@ export function HowItWorks() {
       <div className="site-container">
         <Reveal className="section-heading">
           <Eyebrow>КАК ЭТО РАБОТАЕТ</Eyebrow>
-          <h2 className="section-title">Три касания до отзыва</h2>
+          <h2 className="section-title">От касания до отзыва за 30 секунд</h2>
         </Reveal>
         <Stagger className="steps-list">
           {steps.map((step) => (
