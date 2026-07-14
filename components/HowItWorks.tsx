@@ -1,11 +1,10 @@
-import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 
 const steps = [
   {
     number: "01",
     title: "Гость подносит телефон",
-    text: "Карта на столе рядом с табличкой «оставьте отзыв». Тап - и всё.",
+    text: "Карта на столе рядом с табличкой «оставьте отзыв». Тап — и всё.",
   },
   {
     number: "02",
@@ -21,10 +20,9 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="dark-section section-shell how-section">
+    <section className="dark-section section-shell" id="how">
       <div className="site-container">
         <Reveal className="section-heading">
-          <Eyebrow>КАК ЭТО РАБОТАЕТ</Eyebrow>
           <h2 className="section-title">От касания до отзыва за 30 секунд</h2>
         </Reveal>
         <Stagger className="steps-list">

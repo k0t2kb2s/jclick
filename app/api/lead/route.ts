@@ -1,11 +1,9 @@
 export const runtime = "nodejs";
 
-const RATE_LIMIT_WINDOW = 10 * 60 * 1000;
-const RATE_LIMIT_MAX = 8;
+const RATE_LIMIT_WINDOW = 30 * 1000;
 const quantities = new Set(["1-9 карт", "10-49 карт", "50+ карт"]);
 
 type RateLimitEntry = {
-  count: number;
   resetAt: number;
 };
 
@@ -54,13 +52,11 @@ function isRateLimited(ip: string) {
 
   const current = leadRateLimit.get(ip);
   if (!current || current.resetAt <= now) {
-    leadRateLimit.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+    leadRateLimit.set(ip, { resetAt: now + RATE_LIMIT_WINDOW });
     return false;
   }
 
-  if (current.count >= RATE_LIMIT_MAX) return true;
-  current.count += 1;
-  return false;
+  return true;
 }
 
 export async function POST(request: Request) {
@@ -69,7 +65,15 @@ export async function POST(request: Request) {
   }
 
   if (isRateLimited(getClientIp(request))) {
-    return Response.json({ ok: false }, { status: 429 });
+    return Response.json(
+      { ok: false, error: "Подождите 30 секунд перед следующей заявкой." },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": "30",
+        },
+      },
+    );
   }
 
   const contentLength = Number(request.headers.get("content-length") ?? 0);

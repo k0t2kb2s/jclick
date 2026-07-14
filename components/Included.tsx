@@ -1,56 +1,70 @@
-import { FileCheck2, Palette, ShieldCheck, Sticker } from "lucide-react";
-import { Eyebrow } from "@/components/Eyebrow";
+import { FileCheck2, ShieldCheck, Sticker } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 
-const items = [
-  {
-    title: "Самоклеящийся ПВХ-пластик",
-    text: "Прочная карта, которая клеится на стол или стойку и не мнётся.",
-    icon: Sticker,
-  },
-  {
-    title: "Настройка и гарантия",
-    text: "Пропишем вашу ссылку 2GIS. Если будет брак - бесплатно заменим.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Документы для бизнеса",
-    text: "Работаем по договору, даём закрывающие документы для бухгалтерии.",
-    icon: FileCheck2,
-  },
-  {
-    title: "Уникальный дизайн под бренд",
-    text: "Оформим карту в стиле вашего заведения. Дизайн бесплатный при любом заказе.",
-    icon: Palette,
-    badge: "бесплатно",
-  },
-];
+function CardPreview() {
+  return (
+    <span className="bento-visual" aria-hidden="true">
+      <span className="bento-visual-wordmark">jclick</span>
+      <svg viewBox="0 0 42 42" fill="none">
+        <path d="M12 16c3 2.7 3 7.3 0 10" />
+        <path d="M18 10c6.8 5.9 6.8 16.1 0 22" />
+        <path d="M24 5c10 8.6 10 23.4 0 32" />
+      </svg>
+      <span className="bento-visual-hint">ВАШ ЛОГОТИП · ВАШИ ЦВЕТА</span>
+    </span>
+  );
+}
 
 export function Included() {
   return (
-    <section className="dark-section section-shell included-section section-glow">
-      <div className="glow-orb glow-orb-left" aria-hidden="true" />
+    <section className="dark-section section-shell">
       <div className="site-container">
         <Reveal className="section-heading section-heading-wide">
-          <Eyebrow>ЧТО ВХОДИТ</Eyebrow>
           <h2 className="section-title">Всё для запуска с первого дня</h2>
           <p className="section-subtitle">
             Карта, настройка, дизайн и документы. Можно сразу ставить на стол.
           </p>
         </Reveal>
-        <Stagger className="included-grid">
-          {items.map(({ title, text, icon: Icon, badge }) => (
-            <StaggerItem className="glass-card included-card" key={title}>
-              <span className="icon-tile" aria-hidden="true">
-                <Icon size={25} strokeWidth={1.8} />
-              </span>
+        <Stagger className="bento-grid">
+          <StaggerItem className="bento-card bento-card-design">
+            <CardPreview />
+            <div>
               <h3>
-                {title}
-                {badge && <span className="lime-badge">{badge}</span>}
+                Уникальный дизайн под бренд
+                <span className="lime-badge">бесплатно</span>
               </h3>
-              <p>{text}</p>
-            </StaggerItem>
-          ))}
+              <p>
+                Оформим карту в стиле вашего заведения. Дизайн бесплатный при
+                любом заказе.
+              </p>
+            </div>
+          </StaggerItem>
+          <StaggerItem className="bento-card">
+            <span className="bento-icon" aria-hidden="true">
+              <Sticker size={22} strokeWidth={1.8} />
+            </span>
+            <h3>Самоклеящийся ПВХ-пластик</h3>
+            <p>Прочная карта, которая клеится на стол или стойку и не мнётся.</p>
+          </StaggerItem>
+          <StaggerItem className="bento-card">
+            <span className="bento-icon" aria-hidden="true">
+              <ShieldCheck size={22} strokeWidth={1.8} />
+            </span>
+            <h3>Настройка и гарантия</h3>
+            <p>Пропишем вашу ссылку 2GIS. Если будет брак — бесплатно заменим.</p>
+          </StaggerItem>
+          <StaggerItem className="bento-card bento-card-wide">
+            <span className="bento-icon" aria-hidden="true">
+              <FileCheck2 size={22} strokeWidth={1.8} />
+            </span>
+            <div>
+              <h3>Документы для бизнеса</h3>
+              <p>
+                Работаем по договору, даём закрывающие документы для
+                бухгалтерии.
+              </p>
+            </div>
+          </StaggerItem>
         </Stagger>
       </div>
     </section>

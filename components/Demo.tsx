@@ -50,6 +50,7 @@ function DemoPhone() {
     >
       <div className="phone-speaker" />
       <div className="phone-screen">
+        <span className="phone-url">2gis.kz/review</span>
         <div className="phone-profile">
           <span className="phone-avatar">А</span>
           <strong>Кафе «Астана»</strong>
@@ -84,12 +85,11 @@ export function Demo() {
 
   return (
     <section className="light-section section-shell demo-section">
-      <div className="demo-light-glow" aria-hidden="true" />
       <div className="site-container">
         <Reveal className="section-heading section-heading-wide">
           <Eyebrow dark>ЖИВОЕ ДЕМО</Eyebrow>
           <h2 className="section-title light-title">
-            Один тап - и страница отзыва уже открыта
+            Один тап — и страница отзыва уже открыта
           </h2>
         </Reveal>
         <div className="demo-grid">

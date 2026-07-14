@@ -54,11 +54,17 @@ export function HeroCard() {
       <div className="hero-card-stage" aria-hidden="true">
         <div className="hero-stage-grid" />
         <div className="hero-stage-halo" />
-        <div className="hero-stage-corner hero-stage-corner-top" />
-        <div className="hero-stage-corner hero-stage-corner-bottom" />
+        <span className="hero-pulse" />
+        <span className="hero-pulse hero-pulse-late" />
         <motion.div
           className="hero-card-shell"
           style={{ rotateX, rotateY, transformPerspective: 1100 }}
+          animate={reduceMotion ? undefined : { y: [0, -7, 0] }}
+          transition={
+            reduceMotion
+              ? undefined
+              : { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }
           onPointerMove={handlePointerMove}
           onPointerLeave={resetTilt}
         >
@@ -75,11 +81,6 @@ export function HeroCard() {
           <span className="hero-card-glint" />
         </motion.div>
         <div className="hero-stage-shadow" />
-        <div className="hero-stage-signal">
-          <span />
-          <span />
-          <span />
-        </div>
       </div>
     </figure>
   );

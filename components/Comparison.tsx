@@ -1,5 +1,5 @@
-import { Eyebrow } from "@/components/Eyebrow";
-import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { Check, X } from "lucide-react";
+import { Reveal } from "@/components/Motion";
 
 const qrItems = [
   "Достать и открыть камеру",
@@ -17,37 +17,44 @@ const jclickItems = [
 
 export function Comparison() {
   return (
-    <section className="dark-section section-shell comparison-section section-glow">
-      <div className="glow-orb glow-orb-right" aria-hidden="true" />
+    <section className="dark-section shell-tight">
       <div className="site-container">
         <Reveal className="section-heading">
-          <Eyebrow>СРАВНЕНИЕ</Eyebrow>
           <h2 className="section-title">Почему jclick проще QR-кода</h2>
         </Reveal>
-        <Stagger className="comparison-grid">
-          <StaggerItem className="comparison-card comparison-card-qr">
-            <h3>QR-код</h3>
-            <ul>
-              {qrItems.map((item) => (
-                <li key={item}>
-                  <span className="comparison-x" aria-hidden="true">✕</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </StaggerItem>
-          <StaggerItem className="comparison-card comparison-card-jclick">
-            <h3>jclick</h3>
-            <ul>
-              {jclickItems.map((item) => (
-                <li key={item}>
-                  <span className="comparison-check" aria-hidden="true">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </StaggerItem>
-        </Stagger>
+        <Reveal>
+          <div className="vs-panel">
+            <div className="vs-side vs-side-qr">
+              <h3>QR-код</h3>
+              <ul className="vs-list">
+                {qrItems.map((item) => (
+                  <li key={item}>
+                    <span className="vs-x" aria-hidden="true">
+                      <X size={16} strokeWidth={2.2} />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="vs-side vs-side-jclick">
+              <h3>jclick</h3>
+              <ul className="vs-list">
+                {jclickItems.map((item) => (
+                  <li key={item}>
+                    <span className="vs-check" aria-hidden="true">
+                      <Check size={16} strokeWidth={2.4} />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <span className="vs-badge" aria-hidden="true">
+              vs
+            </span>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -168,6 +168,7 @@ function LeadDialog({
   const firstInputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorText, setErrorText] = useState("Не удалось отправить. Попробуйте ещё раз.");
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => firstInputRef.current?.focus());
@@ -197,6 +198,7 @@ function LeadDialog({
     if (status === "submitting") return;
 
     setStatus("submitting");
+    setErrorText("Не удалось отправить. Попробуйте ещё раз.");
     const form = event.currentTarget;
     const formData = new FormData(form);
 
@@ -213,10 +215,19 @@ function LeadDialog({
         }),
       });
 
-      if (!response.ok) throw new Error("Lead request failed");
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        throw new Error(data?.error || "Lead request failed");
+      }
+
       form.reset();
       setStatus("success");
-    } catch {
+    } catch (error) {
+      if (error instanceof Error && error.message) {
+        setErrorText(error.message);
+      }
       setStatus("error");
     }
   };
@@ -375,7 +386,7 @@ function LeadDialog({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                     >
-                      Не удалось отправить. Попробуйте ещё раз.
+                      {errorText}
                     </motion.p>
                   )}
                 </AnimatePresence>

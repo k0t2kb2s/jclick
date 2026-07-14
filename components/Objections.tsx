@@ -1,4 +1,3 @@
-import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 
 const objections = [
@@ -18,16 +17,14 @@ const objections = [
 
 export function Objections() {
   return (
-    <section className="dark-section section-shell objections-section section-glow">
-      <div className="glow-orb glow-orb-right" aria-hidden="true" />
+    <section className="dark-section shell-tight" id="faq">
       <div className="site-container">
         <Reveal className="section-heading">
-          <Eyebrow>ЧАСТЫЕ СОМНЕНИЯ</Eyebrow>
-          <h2 className="section-title">Отвечаем на частые вопросы</h2>
+          <h2 className="section-title">Частые сомнения</h2>
         </Reveal>
-        <Stagger className="three-card-grid">
+        <Stagger className="faq-list">
           {objections.map((objection) => (
-            <StaggerItem className="glass-card objection-card" key={objection.title}>
+            <StaggerItem className="faq-row" key={objection.title}>
               <h3>{objection.title}</h3>
               <p>{objection.text}</p>
             </StaggerItem>

@@ -6,15 +6,14 @@ import { HeroCard } from "@/components/HeroCard";
 import { LeadButton } from "@/components/LeadButton";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
-const headline = "Гость тапнул - оставил отзыв.";
+const headline = "Гость тапнул — оставил отзыв.";
 
 export function Hero() {
   const reduceMotion = usePrefersReducedMotion();
   const words = headline.split(" ");
 
   return (
-    <section id="top" className="hero dark-section section-glow">
-      <div className="glow-orb glow-orb-hero" aria-hidden="true" />
+    <section id="top" className="hero dark-section">
       <div className="site-container hero-grid">
         <div className="hero-copy">
           <motion.div
@@ -40,7 +39,7 @@ export function Hero() {
                   }}
                 >
                   {word}
-                  {index < words.length - 1 ? "\u00A0" : ""}
+                  {index < words.length - 1 ? " " : ""}
                 </motion.span>
               </span>
             ))}
@@ -59,7 +58,15 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: reduceMotion ? 0 : 0.7 }}
           >
-            <LeadButton arrow />
+            <div className="hero-actions">
+              <LeadButton arrow />
+              <a className="ghost-button" href="#pricing">
+                Смотреть цены
+              </a>
+            </div>
+            <p className="hero-trust">
+              Без подписки · Настройка за 30 секунд · Гарантия замены
+            </p>
           </motion.div>
         </div>
         <motion.div

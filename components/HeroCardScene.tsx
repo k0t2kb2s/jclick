@@ -1,6 +1,6 @@
 "use client";
 
-import { RoundedBox } from "@react-three/drei";
+import { Environment, Lightformer, RoundedBox } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import * as THREE from "three";
@@ -11,10 +11,11 @@ function CardMesh() {
       <RoundedBox args={[5.6, 3.5, 0.22]} radius={0.24} smoothness={8}>
         <meshPhysicalMaterial
           color="#0D120F"
-          roughness={0.3}
-          metalness={0.32}
-          clearcoat={0.86}
-          clearcoatRoughness={0.12}
+          roughness={0.26}
+          metalness={0.55}
+          clearcoat={1}
+          clearcoatRoughness={0.14}
+          envMapIntensity={1.15}
         />
       </RoundedBox>
       <RoundedBox
@@ -38,6 +39,35 @@ function CardMesh() {
   );
 }
 
+/* Процедурное окружение из световых панелей — «студийные» блики на
+   клиркоте карты без загрузки внешних HDR-файлов. */
+function StudioLights() {
+  return (
+    <Environment resolution={256} frames={1}>
+      <Lightformer
+        intensity={3}
+        position={[0, 4, 6]}
+        rotation-x={Math.PI / 6}
+        scale={[12, 3, 1]}
+        color="#EAFFD0"
+      />
+      <Lightformer
+        intensity={1.3}
+        position={[-6, -2, 4]}
+        scale={[6, 2, 1]}
+        color="#B5F23C"
+      />
+      <Lightformer
+        intensity={0.9}
+        position={[7, 1, 2]}
+        rotation-y={-Math.PI / 3}
+        scale={[4, 8, 1]}
+        color="#FFFFFF"
+      />
+    </Environment>
+  );
+}
+
 export default function HeroCardScene() {
   return (
     <Canvas
@@ -47,11 +77,12 @@ export default function HeroCardScene() {
       frameloop="demand"
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
-      <ambientLight intensity={1.1} />
-      <directionalLight position={[3, 5, 6]} intensity={2.8} color="#E7FFD0" />
-      <pointLight position={[-3, -2, 3]} intensity={3.8} color="#B5F23C" />
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[3, 5, 6]} intensity={2.2} color="#E7FFD0" />
+      <pointLight position={[-3, -2, 3]} intensity={3} color="#B5F23C" />
       <Suspense fallback={null}>
         <CardMesh />
+        <StudioLights />
       </Suspense>
     </Canvas>
   );

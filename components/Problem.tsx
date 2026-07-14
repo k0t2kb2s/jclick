@@ -1,44 +1,45 @@
-import { Clock3, ScanLine, TrendingDown } from "lucide-react";
-import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 
-const problems = [
+const chain = [
   {
-    title: "Дома не вспоминает",
-    text: "Гость думает: «оставлю потом», а дома уже забывает.",
-    icon: Clock3,
+    index: "01",
+    title: "Гость доволен",
+    text: "Говорит «обязательно оставлю отзыв» — и уходит.",
   },
   {
-    title: "QR - это лишние действия",
-    text: "Достать камеру, навести, подождать. Половина бросает.",
-    icon: ScanLine,
+    index: "02",
+    title: "Дома — забыл",
+    text: "QR так и не отсканировал: камера, фокус, лень.",
   },
   {
-    title: "2GIS это видит",
-    text: "Мало свежих отзывов → ниже в поиске → меньше гостей.",
-    icon: TrendingDown,
+    index: "03",
+    title: "Отзывов нет",
+    text: "Свежие отзывы не появляются неделями.",
+  },
+  {
+    index: "04",
+    title: "2GIS понижает",
+    text: "Карточка опускается в поиске, новых гостей меньше.",
   },
 ];
 
 export function Problem() {
   return (
-    <section className="dark-section section-shell section-glow">
-      <div className="glow-orb glow-orb-left" aria-hidden="true" />
+    <section className="dark-section shell-tight">
       <div className="site-container">
         <Reveal className="section-heading section-heading-wide">
-          <Eyebrow>ПРОБЛЕМА</Eyebrow>
           <h2 className="section-title">
             Гость доволен, но отзыв так и не появляется.
           </h2>
         </Reveal>
-        <Stagger className="three-card-grid">
-          {problems.map(({ title, text, icon: Icon }) => (
-            <StaggerItem className="glass-card problem-card" key={title}>
-              <span className="icon-tile" aria-hidden="true">
-                <Icon size={24} strokeWidth={1.8} />
+        <Stagger className="chain-grid">
+          {chain.map((node) => (
+            <StaggerItem className="chain-node" key={node.index}>
+              <span className="chain-index" aria-hidden="true">
+                {node.index}
               </span>
-              <h3>{title}</h3>
-              <p>{text}</p>
+              <h3>{node.title}</h3>
+              <p>{node.text}</p>
             </StaggerItem>
           ))}
         </Stagger>

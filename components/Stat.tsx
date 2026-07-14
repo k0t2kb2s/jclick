@@ -34,8 +34,7 @@ export function Stat() {
   }, [isInView, reduceMotion, value]);
 
   return (
-    <section className="dark-section section-shell stat-section section-glow">
-      <div className="stat-glow" aria-hidden="true" />
+    <section className="dark-section shell-roomy stat-section">
       <div className="site-container stat-inner" ref={ref}>
         <Reveal>
           <Eyebrow>ЗАЧЕМ ЭТО БИЗНЕСУ</Eyebrow>
@@ -44,8 +43,8 @@ export function Stat() {
           </div>
           <p className="stat-caption">свежих отзывов за первый месяц с картой</p>
           <p className="stat-text">
-            2GIS показывает выше тех, у кого отзывы свежие и их много. Больше
-            отзывов → выше в поиске → больше гостей.
+            Свежие отзывы поднимают карточку в поиске 2GIS. Выше карточка —
+            больше новых гостей.
           </p>
         </Reveal>
       </div>

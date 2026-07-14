@@ -7,17 +7,20 @@ export function LeadButton({
   arrow = false,
   className = "",
   quantity,
+  variant = "primary",
 }: {
   arrow?: boolean;
   className?: string;
   quantity?: LeadQuantity;
+  variant?: "primary" | "ghost";
 }) {
   const { openModal } = useLeadModal();
+  const baseClass = variant === "ghost" ? "ghost-button" : "primary-button";
 
   return (
     <button
       type="button"
-      className={`primary-button ${className}`}
+      className={`${baseClass} ${className}`}
       onClick={() => openModal(quantity)}
     >
       <span>Оставить заявку{arrow ? " " : ""}</span>

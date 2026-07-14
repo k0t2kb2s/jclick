@@ -1,5 +1,6 @@
 import { Eyebrow } from "@/components/Eyebrow";
 import { LeadButton } from "@/components/LeadButton";
+import { Check } from "lucide-react";
 import type { LeadQuantity } from "@/components/LeadModal";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
 
@@ -38,7 +39,7 @@ const plans: readonly Plan[] = [
     price: "договорная",
     features: [
       "Кастом с вашим логотипом",
-      "Предоплата 30-50%, срок 8-20 дней",
+      "Предоплата 30–50%, срок 8–20 дней",
       "Договор поставки",
     ],
   },
@@ -70,12 +71,18 @@ export function Pricing() {
               <ul className="plan-features">
                 {plan.features.map((feature) => (
                   <li key={feature}>
-                    <span aria-hidden="true">✓</span>
+                    <span aria-hidden="true">
+                      <Check size={15} strokeWidth={2.4} />
+                    </span>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <LeadButton className="pricing-button" quantity={plan.range} />
+              <LeadButton
+                className="pricing-button"
+                quantity={plan.range}
+                variant={plan.popular ? "primary" : "ghost"}
+              />
             </StaggerItem>
           ))}
         </Stagger>
