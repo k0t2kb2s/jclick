@@ -42,12 +42,19 @@ export function Stat() {
       <div className="site-container stat-inner" ref={ref}>
         <Reveal>
           <Eyebrow>РЕЗУЛЬТАТ</Eyebrow>
-          <div className="stat-number" aria-label="до +40%">
+          <motion.div
+            className="stat-number"
+            aria-label="до +40%"
+            initial={reduceMotion ? false : { scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
             <span className="stat-upto" aria-hidden="true">
               до
             </span>
             +<motion.span aria-hidden="true">{rounded}</motion.span>%
-          </div>
+          </motion.div>
           <p className="stat-caption">
             новых отзывов за первый месяц использования
           </p>

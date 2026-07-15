@@ -117,9 +117,9 @@ export default async function OpengraphImage() {
           style={{
             position: "absolute",
             right: 72,
-            top: 210,
-            width: 330,
-            height: 208,
+            top: 190,
+            width: 250,
+            height: 250,
             borderRadius: 26,
             border: `1px solid rgba(216, 249, 140, 0.35)`,
             background:

@@ -173,6 +173,22 @@ body {
   stroke-dashoffset: -420;
 }
 
+/* Лаймовый штрих медленно обходит орбиту - «сигнал в пути» */
+@media (prefers-reduced-motion: no-preference) {
+  .cta-arcs .arc-accent,
+  .hero-arcs .arc-accent {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+    animation: arc-orbit 18s linear infinite;
+  }
+}
+
+@keyframes arc-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* ---------- Custom cursor ---------- */
 
 html.has-cursor-fx body {
@@ -388,6 +404,49 @@ button:focus-visible {
 
 .light-section .section-ghost {
   -webkit-text-stroke-color: rgba(10, 14, 12, 0.08);
+}
+
+/* Параллакс контурного номера: дрейфует медленнее контента (без JS) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-ghost {
+      animation: ghost-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+@keyframes ghost-drift {
+  from {
+    transform: translateY(64px);
+  }
+  to {
+    transform: translateY(-64px);
+  }
+}
+
+/* Пункты сравнения и тарифов всплывают по мере входа в вьюпорт */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .vs-list li,
+    .plan-features li {
+      animation: li-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 85%;
+    }
+  }
+}
+
+@keyframes li-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .section-marker-line {
@@ -629,6 +688,7 @@ button:focus-visible {
 }
 
 .header-nav a {
+  position: relative;
   padding: 9px 14px;
   border-radius: 10px;
   color: var(--muted);
@@ -637,8 +697,26 @@ button:focus-visible {
   transition: color 150ms ease;
 }
 
+/* Лаймовое подчёркивание выезжает слева при ховере */
+.header-nav a::after {
+  position: absolute;
+  right: 14px;
+  bottom: 4px;
+  left: 14px;
+  height: 1px;
+  background: var(--lime);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 240ms var(--ease-out-soft);
+}
+
 .header-nav a:hover {
   color: var(--text);
+}
+
+.header-nav a:hover::after {
+  transform: scaleX(1);
 }
 
 .header-cta {
@@ -788,8 +866,8 @@ button:focus-visible {
 
 .hero-visual {
   position: relative;
-  width: min(560px, 100%);
-  aspect-ratio: 1.24;
+  width: min(500px, 100%);
+  aspect-ratio: 1;
   margin: 0 0 0 auto;
 }
 
@@ -830,16 +908,17 @@ button:focus-visible {
   transform: translate(-50%, -50%);
 }
 
-/* Пульс NFC-касания — единственная «живая» декорация сцены */
+/* Пульс NFC-касания — единственная «живая» декорация сцены.
+   Квадрат 1:1 - реальные пропорции карты-наклейки. */
 .hero-pulse {
   position: absolute;
   z-index: 0;
   top: 50%;
   left: 50%;
-  width: 78%;
-  aspect-ratio: 1.586;
+  width: 76%;
+  aspect-ratio: 1;
   border: 1px solid rgba(181, 242, 60, 0.4);
-  border-radius: 26px;
+  border-radius: 30px;
   margin: 0;
   transform: translate(-50%, -50%);
   animation: nfc-pulse 4s var(--ease-out-soft) infinite;
@@ -881,10 +960,11 @@ button:focus-visible {
 }
 
 /* Сама карта — чистый CSS вместо three.js: тот же «глянцевый пластик»,
-   но без полумегабайта JS в критическом пути. */
+   но без полумегабайта JS в критическом пути. Инсет одинаковый со всех
+   сторон: сцена квадратная, значит и карта - квадрат 1:1. */
 .hero-card-body {
   position: absolute;
-  inset: 15% 6%;
+  inset: 15%;
   border: 1px solid rgba(216, 249, 140, 0.24);
   border-radius: 24px;
   background:
@@ -906,7 +986,7 @@ button:focus-visible {
 
 .hero-card-content {
   position: absolute;
-  inset: 21% 12% 20%;
+  inset: 21%;
   z-index: 3;
   transform: translateZ(24px);
   pointer-events: none;
@@ -956,12 +1036,13 @@ button:focus-visible {
 .hero-card-glint {
   position: absolute;
   z-index: 4;
-  inset: 15% 6%;
+  inset: 15%;
   overflow: hidden;
   border-radius: 24px;
   pointer-events: none;
 }
 
+/* Блик пробегает по карте сам раз в ~7 секунд - карта «живая» без ховера */
 .hero-card-glint::before {
   position: absolute;
   top: -25%;
@@ -971,20 +1052,32 @@ button:focus-visible {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
   content: "";
   transform: skewX(-16deg) translateX(0);
-  transition: transform 720ms var(--ease-out-soft);
 }
 
-.hero-card-shell:hover .hero-card-glint::before {
-  transform: skewX(-16deg) translateX(560%);
+@media (prefers-reduced-motion: no-preference) {
+  .hero-card-glint::before {
+    animation: card-glint 7s var(--ease-out-soft) infinite;
+  }
+}
+
+@keyframes card-glint {
+  0%,
+  60% {
+    transform: skewX(-16deg) translateX(0);
+  }
+  76%,
+  100% {
+    transform: skewX(-16deg) translateX(560%);
+  }
 }
 
 .hero-stage-shadow {
   position: absolute;
   z-index: 1;
-  right: 9%;
-  bottom: 13%;
-  left: 9%;
-  height: 16%;
+  right: 18%;
+  bottom: 11%;
+  left: 18%;
+  height: 14%;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.56);
   filter: blur(24px);
@@ -1079,6 +1172,16 @@ button:focus-visible {
   font-weight: 500;
   letter-spacing: -0.08em;
   line-height: 0.9;
+  transition:
+    transform 260ms var(--ease-out-soft),
+    color 260ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .step-row:hover .step-number {
+    color: var(--lime-soft);
+    transform: translateX(6px) scale(1.04);
+  }
 }
 
 .step-row h3 {
@@ -1166,7 +1269,8 @@ button:focus-visible {
 
 .demo-nfc-card {
   position: relative;
-  aspect-ratio: 1.6;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
   border: 1px solid rgba(181, 242, 60, 0.26);
   border-radius: 19px;
   background:
@@ -1552,9 +1656,9 @@ button:focus-visible {
 .bento-visual {
   position: relative;
   align-self: center;
-  width: min(78%, 330px);
-  aspect-ratio: 1.586;
-  margin: 12px 0 44px;
+  width: min(62%, 264px);
+  aspect-ratio: 1;
+  margin: 8px 0 36px;
   border: 1px solid rgba(181, 242, 60, 0.3);
   border-radius: 18px;
   background:
@@ -2336,8 +2440,8 @@ button:focus-visible {
   }
 
   .hero-visual {
-    width: min(520px, 100%);
-    aspect-ratio: 1.35;
+    width: min(420px, 90%);
+    aspect-ratio: 1;
     margin-inline: auto;
   }
 
@@ -2521,8 +2625,8 @@ button:focus-visible {
   }
 
   .hero-visual {
-    width: 100%;
-    aspect-ratio: 1.42;
+    width: min(340px, 92%);
+    aspect-ratio: 1;
   }
 
   .hero-card-stage {
@@ -2530,7 +2634,7 @@ button:focus-visible {
   }
 
   .hero-card-content {
-    inset: 19% 11% 17%;
+    inset: 18%;
   }
 
   .hero-card-nfc {
@@ -2539,8 +2643,8 @@ button:focus-visible {
 
   .hero-card-glint,
   .hero-card-body {
-    inset: 12% 5%;
-    border-radius: 16px;
+    inset: 12%;
+    border-radius: 18px;
   }
 
   .hero-title {
