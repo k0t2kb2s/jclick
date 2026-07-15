@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "jclick — NFC-карты для отзывов на 2GIS";
+export const alt = "jclick - NFC-карты для отзывов на 2GIS";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -98,8 +98,8 @@ export default async function OpengraphImage() {
                 flexWrap: "wrap",
               }}
             >
-              Гость тапнул —&nbsp;
-              <span style={{ color: lime }}>оставил отзыв.</span>
+              Касание смартфона -&nbsp;
+              <span style={{ color: lime }}>и отзыв готов.</span>
             </div>
           </div>
           <div

@@ -10,6 +10,7 @@ import { Objections } from "@/components/Objections";
 import { Pricing } from "@/components/Pricing";
 import { Problem } from "@/components/Problem";
 import { Stat } from "@/components/Stat";
+import { Ticker } from "@/components/Ticker";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -50,12 +51,12 @@ const structuredData = {
           name: "Это дорого?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Это разовая покупка, которая окупается с первых клиентов, пришедших благодаря свежим отзывам. Для начала можно взять одну карту для теста.",
+            text: "Это разовая покупка, которая окупается с первых клиентов, пришедших благодаря свежим отзывам. Можно начать с минимального объёма - от 1 карты.",
           },
         },
         {
           "@type": "Question",
-          name: "У нас уже хорошая база отзывов — зачем карта?",
+          name: "У нас уже хорошая база отзывов - зачем карта?",
           acceptedAnswer: {
             "@type": "Answer",
             text: "Алгоритмы 2GIS продвигают карточки, где отзывы обновляются регулярно. Карта помогает поддерживать активность и удерживать позиции в топе.",
@@ -63,10 +64,10 @@ const structuredData = {
         },
         {
           "@type": "Question",
-          name: "Сейчас нет времени — что делать?",
+          name: "Сейчас нет времени - что делать?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Оставим тестовую карту на несколько дней. Проверите её эффективность в удобное для вас время.",
+            text: "Внедрение не требует усилий с вашей стороны. Мы полностью берём на себя техническую настройку - вам нужно только разместить готовые карты в заведении.",
           },
         },
       ],
@@ -84,6 +85,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Ticker />
         <Problem />
         <HowItWorks />
         <Demo />

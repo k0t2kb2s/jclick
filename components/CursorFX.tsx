@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 
 const INTERACTIVE = "a, button, [role='button'], label, input, select, textarea";
-const TORCH_SIZE = 560;
 
-/* Кастомный курсор + «фонарик», подсвечивающий сетку фона. Один rAF-цикл,
-   только transform/opacity — ничего не уходит с композитора. */
+/* Кастомный курсор: точка + кольцо с пружинным отставанием. Один rAF-цикл,
+   только transform/opacity - ничего не уходит с композитора. */
 export function CursorFX() {
   const [enabled, setEnabled] = useState(false);
 
@@ -33,16 +32,12 @@ export function CursorFX() {
 
     const dot = document.getElementById("cursor-dot");
     const ring = document.getElementById("cursor-ring");
-    const torch = document.getElementById("backdrop-torch");
-    const torchGrid = torch?.firstElementChild as HTMLElement | null;
     if (!dot || !ring) return;
 
     let pointerX = -100;
     let pointerY = -100;
     let ringX = -100;
     let ringY = -100;
-    let torchX = -100;
-    let torchY = -100;
     let ringScale = 1;
     let targetScale = 1;
     let pressed = false;
@@ -52,19 +47,10 @@ export function CursorFX() {
     const render = () => {
       ringX += (pointerX - ringX) * 0.22;
       ringY += (pointerY - ringY) * 0.22;
-      torchX += (pointerX - torchX) * 0.12;
-      torchY += (pointerY - torchY) * 0.12;
       ringScale += ((pressed ? targetScale * 0.8 : targetScale) - ringScale) * 0.2;
 
       dot.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0)`;
       ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) scale(${ringScale})`;
-
-      if (torch && torchGrid) {
-        const offsetX = torchX - TORCH_SIZE / 2;
-        const offsetY = torchY - TORCH_SIZE / 2;
-        torch.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
-        torchGrid.style.transform = `translate3d(${-offsetX}px, ${-offsetY}px, 0)`;
-      }
 
       frame = requestAnimationFrame(render);
     };
@@ -77,11 +63,8 @@ export function CursorFX() {
         visible = true;
         ringX = pointerX;
         ringY = pointerY;
-        torchX = pointerX;
-        torchY = pointerY;
         dot.style.opacity = "1";
         ring.style.opacity = "1";
-        root.classList.add("torch-on");
       }
 
       const glowCard = (event.target as Element | null)?.closest<HTMLElement>("[data-glow]");
@@ -110,7 +93,6 @@ export function CursorFX() {
       visible = false;
       dot.style.opacity = "0";
       ring.style.opacity = "0";
-      root.classList.remove("torch-on");
     };
 
     window.addEventListener("pointermove", handleMove, { passive: true });
@@ -127,7 +109,7 @@ export function CursorFX() {
       window.removeEventListener("pointerdown", handleDown);
       window.removeEventListener("pointerup", handleUp);
       document.documentElement.removeEventListener("pointerleave", handleLeave);
-      root.classList.remove("has-cursor-fx", "torch-on");
+      root.classList.remove("has-cursor-fx");
     };
   }, [enabled]);
 
