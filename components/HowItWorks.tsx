@@ -21,7 +21,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="dark-section section-shell" id="how">
+    <section className="dark-section dark-section-elev section-shell" id="how">
       <div className="site-container">
         <SectionMarker index="02" label="КАК РАБОТАЕТ" />
         <Reveal className="section-heading">

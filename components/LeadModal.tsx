@@ -49,6 +49,21 @@ const flyingCards = [
   { x: -160, y: 30, rotate: 286, delay: 0.1 },
 ];
 
+function TelegramIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path
+        d="M26.6 6.4 5.9 14.5c-1.1.4-1 1.9.1 2.2l5.2 1.6 2 6.3c.3 1 1.6 1.2 2.3.4l2.9-3 5.4 4c.8.6 2 .2 2.2-.9l3-16.8c.2-1.2-1-2.2-2.4-1.9Z"
+        fill="currentColor"
+      />
+      <path
+        d="m11.2 18.3 10.9-6.7c.5-.3 1 .3.6.7l-8.9 8.2-.4 3.6c-.1.5-.8.6-1 .1l-1.2-5.9Z"
+        fill="#0D130F"
+      />
+    </svg>
+  );
+}
+
 function WhatsAppIcon() {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
@@ -359,21 +374,38 @@ function LeadDialog({
                   или
                   <span />
                 </div>
-                <a
-                  className="lead-whatsapp"
-                  href="https://wa.me/77067010125?text=Здравствуйте!%20Хочу%20попробовать%20карту%20jclick%20для%20отзывов."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="lead-whatsapp-icon">
-                    <WhatsAppIcon />
-                  </span>
-                  <span className="lead-whatsapp-copy">
-                    <strong>Написать в WhatsApp</strong>
-                    <small>+7 706 701 01 25</small>
-                  </span>
-                  <span className="lead-whatsapp-arrow" aria-hidden="true">↗</span>
-                </a>
+                <div className="lead-messengers">
+                  <a
+                    className="lead-messenger lead-messenger-whatsapp"
+                    href="https://wa.me/77067010125?text=Здравствуйте!%20Хочу%20попробовать%20карту%20jclick%20для%20отзывов."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="lead-msgr-icon">
+                      <WhatsAppIcon />
+                    </span>
+                    <span className="lead-msgr-copy">
+                      <strong>WhatsApp</strong>
+                      <small>+7 706 701 01 25</small>
+                    </span>
+                    <span className="lead-msgr-arrow" aria-hidden="true">↗</span>
+                  </a>
+                  <a
+                    className="lead-messenger lead-messenger-telegram"
+                    href="https://justcl1ck.t.me"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="lead-msgr-icon">
+                      <TelegramIcon />
+                    </span>
+                    <span className="lead-msgr-copy">
+                      <strong>Telegram</strong>
+                      <small>@justcl1ck</small>
+                    </span>
+                    <span className="lead-msgr-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </div>
                 <p className="lead-privacy">
                   Нажимая кнопку, вы соглашаетесь на обработку данных.
                 </p>

@@ -18,7 +18,7 @@ function CardPreview() {
 
 export function Included() {
   return (
-    <section className="dark-section section-shell">
+    <section className="dark-section dark-section-elev section-shell">
       <div className="site-container">
         <SectionMarker index="06" label="ЧТО ВХОДИТ" />
         <Reveal className="section-heading section-heading-wide">

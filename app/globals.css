@@ -312,6 +312,17 @@ button:focus-visible {
   color: var(--text);
 }
 
+/* Приподнятая тональная панель: чуть светлее фона, даёт странице ритм
+   тёмный-светлее-тёмный вместо одного сплошного полотна */
+.dark-section-elev {
+  border-block: 1px solid var(--hairline);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.006)
+  );
+}
+
 .light-section {
   position: relative;
   overflow: clip;
@@ -450,9 +461,33 @@ button:focus-visible {
 }
 
 .section-marker-line {
+  position: relative;
   flex: 1;
   height: 1px;
   background: var(--hairline);
+}
+
+/* Типографские метки-крестики на концах линии - приём из печатной вёрстки */
+.section-marker-line::before,
+.section-marker-line::after {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  background:
+    linear-gradient(currentColor, currentColor) center / 9px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1px 9px no-repeat;
+  content: "";
+  opacity: 0.55;
+  transform: translateY(-50%);
+}
+
+.section-marker-line::before {
+  left: -1px;
+}
+
+.section-marker-line::after {
+  right: -1px;
 }
 
 /* Прогрессив: линия маркера растёт при входе секции (без JS) */
@@ -2164,66 +2199,105 @@ button:focus-visible {
   background: rgba(255, 255, 255, 0.07);
 }
 
-.lead-whatsapp {
+/* Мессенджеры: общий каркас, у каждого - свой фирменный цвет */
+.lead-messengers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lead-messenger {
   display: grid;
   min-height: 66px;
   grid-template-columns: 42px 1fr auto;
   align-items: center;
-  gap: 13px;
-  padding: 10px 15px;
-  border: 1px solid rgba(37, 211, 102, 0.2);
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid;
   border-radius: var(--radius-button);
-  background: rgba(37, 211, 102, 0.045);
   transition:
     transform 200ms var(--ease-out-soft),
     border-color 200ms ease,
     background-color 200ms ease;
 }
 
-.lead-whatsapp:hover {
-  border-color: rgba(37, 211, 102, 0.42);
-  background: rgba(37, 211, 102, 0.08);
+.lead-messenger:hover {
   transform: translateY(-2px);
 }
 
-.lead-whatsapp-icon {
+.lead-messenger-whatsapp {
+  border-color: rgba(37, 211, 102, 0.2);
+  background: rgba(37, 211, 102, 0.045);
+}
+
+.lead-messenger-whatsapp:hover {
+  border-color: rgba(37, 211, 102, 0.42);
+  background: rgba(37, 211, 102, 0.08);
+}
+
+.lead-messenger-telegram {
+  border-color: rgba(42, 171, 238, 0.22);
+  background: rgba(42, 171, 238, 0.05);
+}
+
+.lead-messenger-telegram:hover {
+  border-color: rgba(42, 171, 238, 0.46);
+  background: rgba(42, 171, 238, 0.09);
+}
+
+.lead-msgr-icon {
   display: grid;
   width: 42px;
   height: 42px;
   place-items: center;
   border-radius: 12px;
+}
+
+.lead-messenger-whatsapp .lead-msgr-icon {
   background: #25d366;
   color: #f7fff9;
 }
 
-.lead-whatsapp-icon svg {
+.lead-messenger-telegram .lead-msgr-icon {
+  background: #2aabee;
+  color: #f4fbff;
+}
+
+.lead-msgr-icon svg {
   width: 29px;
   height: 29px;
 }
 
-.lead-whatsapp-copy {
+.lead-msgr-copy {
   display: grid;
   gap: 3px;
 }
 
-.lead-whatsapp-copy strong {
+.lead-msgr-copy strong {
   color: var(--text);
   font-size: 0.88rem;
   letter-spacing: -0.015em;
 }
 
-.lead-whatsapp-copy small {
+.lead-msgr-copy small {
   color: var(--muted);
   font-size: 0.72rem;
 }
 
-.lead-whatsapp-arrow {
-  color: #62df90;
+.lead-msgr-arrow {
   font-size: 1.2rem;
   transition: transform 200ms ease;
 }
 
-.lead-whatsapp:hover .lead-whatsapp-arrow {
+.lead-messenger-whatsapp .lead-msgr-arrow {
+  color: #62df90;
+}
+
+.lead-messenger-telegram .lead-msgr-arrow {
+  color: #5ec2f2;
+}
+
+.lead-messenger:hover .lead-msgr-arrow {
   transform: translate(2px, -2px);
 }
 
@@ -2563,6 +2637,10 @@ button:focus-visible {
   .lead-field input,
   .lead-field select {
     height: 50px;
+  }
+
+  .lead-messengers {
+    grid-template-columns: 1fr;
   }
 
   .lead-success {

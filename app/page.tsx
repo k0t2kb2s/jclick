@@ -20,7 +20,10 @@ const structuredData = {
       "@id": "https://j-click.app/#organization",
       name: "jclick",
       url: "https://j-click.app",
-      sameAs: ["https://instagram.com/jcl1ck"],
+      sameAs: [
+        "https://instagram.com/jcl1ck",
+        "https://justcl1ck.t.me",
+      ],
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+7-706-701-01-25",

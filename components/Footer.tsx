@@ -10,6 +10,13 @@ export function Footer() {
         </span>
         <nav className="footer-links" aria-label="Контакты">
           <a
+            href="https://justcl1ck.t.me"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Telegram @justcl1ck
+          </a>
+          <a
             href="https://instagram.com/jcl1ck"
             target="_blank"
             rel="noopener noreferrer"
