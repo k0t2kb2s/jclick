@@ -1,4 +1,5 @@
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 
 const steps = [
   {
@@ -22,6 +23,7 @@ export function HowItWorks() {
   return (
     <section className="dark-section section-shell" id="how">
       <div className="site-container">
+        <SectionMarker index="02" label="КАК РАБОТАЕТ" />
         <Reveal className="section-heading">
           <h2 className="section-title">От касания до отзыва за 30 секунд</h2>
         </Reveal>

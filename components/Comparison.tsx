@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react";
 import { Reveal } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 
 const qrItems = [
   "Достать и открыть камеру",
@@ -19,6 +20,7 @@ export function Comparison() {
   return (
     <section className="dark-section shell-tight">
       <div className="site-container">
+        <SectionMarker index="04" label="JCLICK VS QR" />
         <Reveal className="section-heading">
           <h2 className="section-title">Почему jclick проще QR-кода</h2>
         </Reveal>

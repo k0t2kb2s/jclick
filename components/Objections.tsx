@@ -1,4 +1,5 @@
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 
 const objections = [
   {
@@ -19,6 +20,7 @@ export function Objections() {
   return (
     <section className="dark-section shell-tight" id="faq">
       <div className="site-container">
+        <SectionMarker index="08" label="ВОПРОСЫ" />
         <Reveal className="section-heading">
           <h2 className="section-title">Частые сомнения</h2>
         </Reveal>

@@ -1,8 +1,8 @@
-import { Eyebrow } from "@/components/Eyebrow";
 import { LeadButton } from "@/components/LeadButton";
 import { Check } from "lucide-react";
 import type { LeadQuantity } from "@/components/LeadModal";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 
 type Plan = {
   range: LeadQuantity;
@@ -49,8 +49,8 @@ export function Pricing() {
   return (
     <section className="dark-section section-shell pricing-section" id="pricing">
       <div className="site-container">
+        <SectionMarker index="07" label="ЦЕНЫ" />
         <Reveal className="section-heading section-heading-wide">
-          <Eyebrow>ЦЕНЫ</Eyebrow>
           <h2 className="section-title">Платите один раз. Без подписки</h2>
           <p className="section-subtitle">
             Окупается благодаря первым гостям, которых приведут новые отзывы.

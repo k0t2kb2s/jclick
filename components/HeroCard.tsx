@@ -62,15 +62,17 @@ export function HeroCard() {
           onPointerMove={handlePointerMove}
           onPointerLeave={resetTilt}
         >
-          <div className="hero-card-body" />
-          <div className="hero-card-content" aria-hidden="true">
-            <span className="hero-card-wordmark">jclick</span>
-            <span className="hero-card-nfc">
-              <NfcWaves />
-            </span>
-            <span className="hero-card-chip" />
+          <div className="hero-card-inner">
+            <div className="hero-card-body" />
+            <div className="hero-card-content" aria-hidden="true">
+              <span className="hero-card-wordmark">jclick</span>
+              <span className="hero-card-nfc">
+                <NfcWaves />
+              </span>
+              <span className="hero-card-chip" />
+            </div>
+            <span className="hero-card-glint" />
           </div>
-          <span className="hero-card-glint" />
         </motion.div>
         <div className="hero-stage-shadow" />
       </div>

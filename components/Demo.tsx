@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const demoSteps = [
@@ -86,8 +86,8 @@ export function Demo() {
   return (
     <section className="light-section section-shell demo-section">
       <div className="site-container">
+        <SectionMarker index="03" label="ЖИВОЕ ДЕМО" />
         <Reveal className="section-heading section-heading-wide">
-          <Eyebrow dark>ЖИВОЕ ДЕМО</Eyebrow>
           <h2 className="section-title light-title">
             Один тап — и страница отзыва уже открыта
           </h2>

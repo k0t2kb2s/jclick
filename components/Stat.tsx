@@ -10,6 +10,7 @@ import {
 import { useEffect, useRef } from "react";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Reveal } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 export function Stat() {
@@ -35,9 +36,12 @@ export function Stat() {
 
   return (
     <section className="dark-section shell-roomy stat-section">
+      <div className="site-container">
+        <SectionMarker index="05" label="ЗАЧЕМ ЭТО БИЗНЕСУ" />
+      </div>
       <div className="site-container stat-inner" ref={ref}>
         <Reveal>
-          <Eyebrow>ЗАЧЕМ ЭТО БИЗНЕСУ</Eyebrow>
+          <Eyebrow>ЭФФЕКТ</Eyebrow>
           <div className="stat-number" aria-label="+40%">
             +<motion.span aria-hidden="true">{rounded}</motion.span>%
           </div>

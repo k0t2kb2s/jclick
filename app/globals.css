@@ -156,11 +156,47 @@ button:focus-visible {
 .section-title {
   margin: 0;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
-  font-size: clamp(2.15rem, 4.3vw, 3.9rem);
+  font-size: clamp(2.3rem, 4.5vw, 4.2rem);
   font-weight: 750;
   letter-spacing: -0.032em;
   line-height: 1.04;
   text-wrap: balance;
+}
+
+/* Моно-маркер секции: страница читается как пронумерованная последовательность */
+.section-marker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(40px, 6vw, 64px);
+  color: var(--text-dim);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.section-marker b {
+  color: var(--lime);
+  font-weight: 700;
+}
+
+.section-marker-line {
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.light-section .section-marker {
+  color: var(--light-muted);
+}
+
+.light-section .section-marker b {
+  color: var(--lime-ink);
+}
+
+.light-section .section-marker-line {
+  background: rgba(10, 14, 12, 0.12);
 }
 
 .light-title {
@@ -385,8 +421,7 @@ button:focus-visible {
 /* ---------- Hero ---------- */
 
 .hero {
-  min-height: 840px;
-  padding: 156px 0 104px;
+  padding: 150px 0 96px;
   isolation: isolate;
 }
 
@@ -402,12 +437,11 @@ button:focus-visible {
   pointer-events: none;
 }
 
-.hero-grid {
+.hero-row {
   display: grid;
-  min-height: 580px;
-  grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+  grid-template-columns: minmax(0, 1fr) minmax(400px, 0.92fr);
   align-items: center;
-  gap: clamp(20px, 4vw, 64px);
+  gap: clamp(24px, 5vw, 80px);
 }
 
 .hero-copy {
@@ -415,14 +449,14 @@ button:focus-visible {
   z-index: 3;
 }
 
+/* Полноширинный дисплейный заголовок — типографика ведёт первый экран */
 .hero-title {
-  max-width: 760px;
-  margin: 0;
+  margin: 0 0 clamp(30px, 4.5vw, 52px);
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
-  font-size: clamp(3.3rem, 5.9vw, 5.5rem);
+  font-size: clamp(3rem, 7.4vw, 7rem);
   font-weight: 800;
   letter-spacing: -0.045em;
-  line-height: 0.96;
+  line-height: 0.94;
   text-wrap: balance;
 }
 
@@ -494,8 +528,8 @@ button:focus-visible {
 }
 
 .hero-subtitle {
-  max-width: 620px;
-  margin: 30px 0 34px;
+  max-width: 560px;
+  margin: 0 0 34px;
   color: var(--muted);
   font-size: clamp(1.06rem, 1.7vw, 1.26rem);
   line-height: 1.58;
@@ -524,17 +558,17 @@ button:focus-visible {
 
 .hero-visual {
   position: relative;
-  width: min(610px, 48vw);
-  aspect-ratio: 1.04;
-  margin: 0;
+  width: min(560px, 100%);
+  aspect-ratio: 1.24;
+  margin: 0 0 0 auto;
 }
 
 .hero-card-stage {
   position: absolute;
-  inset: 2%;
+  inset: 0;
   overflow: hidden;
   border: 1px solid var(--hairline);
-  border-radius: 32px;
+  border-radius: 30px;
   background: linear-gradient(150deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.005));
   box-shadow:
     0 35px 90px rgba(0, 0, 0, 0.28),
@@ -572,7 +606,7 @@ button:focus-visible {
   z-index: 0;
   top: 50%;
   left: 50%;
-  width: 64%;
+  width: 78%;
   aspect-ratio: 1.586;
   border: 1px solid rgba(181, 242, 60, 0.4);
   border-radius: 26px;
@@ -604,16 +638,23 @@ button:focus-visible {
 .hero-card-shell {
   position: absolute;
   z-index: 2;
-  inset: 3% -1% 4%;
+  inset: 0;
   transform-style: preserve-3d;
   will-change: transform;
+}
+
+/* Лёгкий статичный наклон карты — энергия без three.js */
+.hero-card-inner {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-2.5deg);
 }
 
 /* Сама карта — чистый CSS вместо three.js: тот же «глянцевый пластик»,
    но без полумегабайта JS в критическом пути. */
 .hero-card-body {
   position: absolute;
-  inset: 19% 5%;
+  inset: 15% 6%;
   border: 1px solid rgba(216, 249, 140, 0.24);
   border-radius: 24px;
   background:
@@ -635,7 +676,7 @@ button:focus-visible {
 
 .hero-card-content {
   position: absolute;
-  inset: 24% 10.5% 22%;
+  inset: 21% 12% 20%;
   z-index: 3;
   transform: translateZ(24px);
   pointer-events: none;
@@ -685,7 +726,7 @@ button:focus-visible {
 .hero-card-glint {
   position: absolute;
   z-index: 4;
-  inset: 19% 5%;
+  inset: 15% 6%;
   overflow: hidden;
   border-radius: 24px;
   pointer-events: none;
@@ -734,8 +775,12 @@ button:focus-visible {
   border-top: 1px solid var(--hairline);
 }
 
+/* Финал цепочки — то, ради чего всё: выделен лаймовой панелью */
 .chain-node:last-child {
-  border-top-color: rgba(181, 242, 60, 0.42);
+  padding: 22px 22px 26px;
+  border: 1px solid rgba(181, 242, 60, 0.26);
+  border-radius: var(--radius-card);
+  background: linear-gradient(165deg, rgba(181, 242, 60, 0.08), rgba(181, 242, 60, 0.02) 65%);
 }
 
 .chain-index {
@@ -1425,7 +1470,7 @@ button:focus-visible {
   min-height: 90px;
   margin: 0;
   font-family: var(--font-inter-tight), var(--font-inter), sans-serif;
-  font-size: clamp(2rem, 3.5vw, 2.9rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.3rem);
   font-variant-numeric: tabular-nums;
   font-weight: 800;
   letter-spacing: -0.045em;
@@ -1468,6 +1513,22 @@ button:focus-visible {
 
 .pricing-button {
   width: 100%;
+}
+
+@media (min-width: 861px) {
+  .pricing-card-popular {
+    border-color: rgba(181, 242, 60, 0.5);
+    box-shadow:
+      0 26px 70px rgba(0, 0, 0, 0.35),
+      inset 0 1px rgba(216, 249, 140, 0.1);
+    transform: scale(1.04);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 861px) {
+  .pricing-card-popular:hover {
+    transform: scale(1.04) translateY(-4px);
+  }
 }
 
 /* ---------- FAQ ---------- */
@@ -1962,20 +2023,15 @@ button:focus-visible {
 
 @media (max-width: 1050px) {
   .hero {
-    min-height: auto;
     padding-top: 130px;
   }
 
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(350px, 0.8fr);
+  .hero-row {
+    grid-template-columns: minmax(0, 1fr) minmax(330px, 0.85fr);
   }
 
   .hero-title {
-    font-size: clamp(3.4rem, 7vw, 5rem);
-  }
-
-  .hero-visual {
-    width: min(540px, 48vw);
+    font-size: clamp(3.1rem, 7.8vw, 5.6rem);
   }
 
   .chain-grid {
@@ -2012,18 +2068,19 @@ button:focus-visible {
   .section-shell,
   .shell-tight,
   .shell-roomy {
-    padding-block: 96px;
+    padding-block: 84px;
   }
 
   .hero {
-    padding: 112px 0 96px;
+    padding: 112px 0 84px;
   }
 
-  .hero-grid {
+  /* Мобильный порядок: сначала сообщение и кнопки, карта — после */
+  .hero-row {
     display: flex;
-    min-height: auto;
-    flex-direction: column-reverse;
-    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 44px;
   }
 
   .hero-copy {
@@ -2035,22 +2092,22 @@ button:focus-visible {
   }
 
   .hero-visual {
-    width: min(600px, 100%);
+    width: min(520px, 100%);
+    aspect-ratio: 1.35;
     margin-inline: auto;
   }
 
   .hero-title {
-    max-width: 650px;
-    font-size: clamp(3.4rem, 11.5vw, 5.4rem);
+    font-size: clamp(3rem, 10.8vw, 5rem);
   }
 
   .chain-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 22px;
   }
 
   .chain-index {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .step-row {
@@ -2114,6 +2171,11 @@ button:focus-visible {
 }
 
 @media (max-width: 640px) {
+  .section-marker {
+    margin-bottom: 30px;
+    font-size: 0.6rem;
+  }
+
   .lead-overlay {
     padding: 10px;
   }
@@ -2165,11 +2227,11 @@ button:focus-visible {
   .section-shell,
   .shell-tight,
   .shell-roomy {
-    padding-block: 84px;
+    padding-block: 70px;
   }
 
   .section-heading {
-    margin-bottom: 42px;
+    margin-bottom: 38px;
   }
 
   .section-title {
@@ -2202,25 +2264,24 @@ button:focus-visible {
   }
 
   .hero {
-    padding: 92px 0 84px;
+    padding: 96px 0 70px;
+  }
+
+  .hero-row {
+    gap: 36px;
   }
 
   .hero-visual {
-    width: min(470px, 112%);
-    margin-left: -6%;
+    width: 100%;
+    aspect-ratio: 1.42;
   }
 
   .hero-card-stage {
-    inset: 2% 0;
-    border-radius: 26px;
-  }
-
-  .hero-card-shell {
-    inset: 2% -1% 3%;
+    border-radius: 22px;
   }
 
   .hero-card-content {
-    inset: 23% 12% 21%;
+    inset: 19% 11% 17%;
   }
 
   .hero-card-nfc {
@@ -2229,16 +2290,18 @@ button:focus-visible {
 
   .hero-card-glint,
   .hero-card-body {
+    inset: 12% 5%;
     border-radius: 16px;
   }
 
   .hero-title {
-    font-size: clamp(3rem, 15vw, 4.4rem);
-    line-height: 0.95;
+    margin-bottom: 26px;
+    font-size: clamp(2.6rem, 13vw, 3.8rem);
+    line-height: 0.97;
   }
 
   .hero-subtitle {
-    margin: 24px 0 28px;
+    margin: 0 0 26px;
     font-size: 1.04rem;
   }
 
@@ -2263,7 +2326,7 @@ button:focus-visible {
   .step-row {
     grid-template-columns: 74px 1fr;
     gap: 14px;
-    padding: 28px 0;
+    padding: 22px 0;
   }
 
   .step-number {
@@ -2340,7 +2403,11 @@ button:focus-visible {
   }
 
   .cta-section {
-    padding-block: 116px;
+    padding-block: 96px;
+  }
+
+  .chain-node:last-child {
+    padding: 18px 16px 20px;
   }
 
   .cta-title {

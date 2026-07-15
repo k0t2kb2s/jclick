@@ -1,4 +1,5 @@
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 
 const chain = [
   {
@@ -27,6 +28,7 @@ export function Problem() {
   return (
     <section className="dark-section shell-tight">
       <div className="site-container">
+        <SectionMarker index="01" label="ПРОБЛЕМА" />
         <Reveal className="section-heading section-heading-wide">
           <h2 className="section-title">
             Гость доволен, но отзыв так и не появляется.

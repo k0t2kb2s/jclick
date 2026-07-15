@@ -1,5 +1,6 @@
 import { FileCheck2, ShieldCheck, Sticker } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/Motion";
+import { SectionMarker } from "@/components/SectionMarker";
 
 function CardPreview() {
   return (
@@ -19,6 +20,7 @@ export function Included() {
   return (
     <section className="dark-section section-shell">
       <div className="site-container">
+        <SectionMarker index="06" label="ЧТО ВХОДИТ" />
         <Reveal className="section-heading section-heading-wide">
           <h2 className="section-title">Всё для запуска с первого дня</h2>
           <p className="section-subtitle">
