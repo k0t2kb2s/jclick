@@ -6,6 +6,7 @@ export function Footer() {
       <div className="site-container footer-inner">
         <span className="footer-brand">
           <Logo compact />
+          <span>© {new Date().getFullYear()}</span>
         </span>
         <nav className="footer-links" aria-label="Контакты">
           <a

@@ -6,17 +6,33 @@ import "@fontsource-variable/inter/wght.css";
 import "@fontsource/jetbrains-mono/index.css";
 import "./globals.css";
 
+const title = "jclick — NFC-карты для отзывов на 2GIS";
 const description =
   "NFC-карты, которые превращают каждого гостя в свежий отзыв на 2GIS. Без приложений. Быстрее QR.";
 
 export const metadata: Metadata = {
-  title: "jclick — NFC-карты для отзывов на 2GIS",
+  metadataBase: new URL("https://j-click.app"),
+  title,
   description,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "jclick — NFC-карты для отзывов на 2GIS",
+    title,
     description,
+    url: "/",
+    siteName: "jclick",
     locale: "ru_RU",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   icons: {
     icon: "/icon.svg",

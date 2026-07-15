@@ -1,18 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import {
   motion,
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import { Suspense, type PointerEvent as ReactPointerEvent } from "react";
+import { type PointerEvent as ReactPointerEvent } from "react";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
-
-const CardScene = dynamic(() => import("@/components/HeroCardScene"), {
-  ssr: false,
-  loading: () => <div className="hero-card-scene-fallback" />,
-});
 
 function NfcWaves() {
   return (
@@ -68,9 +62,7 @@ export function HeroCard() {
           onPointerMove={handlePointerMove}
           onPointerLeave={resetTilt}
         >
-          <Suspense fallback={<div className="hero-card-scene-fallback" />}>
-            <CardScene />
-          </Suspense>
+          <div className="hero-card-body" />
           <div className="hero-card-content" aria-hidden="true">
             <span className="hero-card-wordmark">jclick</span>
             <span className="hero-card-nfc">

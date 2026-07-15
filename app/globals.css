@@ -10,7 +10,7 @@
   --bg-elev: #101512;
   --text: #f4f6f3;
   --muted: #8e9a93;
-  --text-dim: #5f6962;
+  --text-dim: #6e7a72;
   --lime: #b5f23c;
   --lime-soft: #d8f98c;
   --lime-ink: #527600;
@@ -436,6 +436,57 @@ button:focus-visible {
 
 .hero-word {
   display: inline-block;
+  animation: hero-word-rise 0.75s var(--ease-out-soft) both;
+}
+
+/* Вход героя на CSS — контент виден с первой отрисовки, до гидрации JS */
+.hero-fade-up {
+  animation: hero-fade-up 0.65s var(--ease-out-soft) both;
+}
+
+.hero-delay-copy {
+  animation-delay: 0.55s;
+}
+
+.hero-delay-actions {
+  animation-delay: 0.7s;
+}
+
+.hero-card-enter {
+  animation: hero-card-in 1s var(--ease-out-soft) 0.35s both;
+}
+
+@keyframes hero-word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(115%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(30px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .hero-title-accent {
@@ -558,21 +609,27 @@ button:focus-visible {
   will-change: transform;
 }
 
-.hero-card-shell canvas,
-.hero-card-scene-fallback {
-  position: absolute !important;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.hero-card-scene-fallback::before {
+/* Сама карта — чистый CSS вместо three.js: тот же «глянцевый пластик»,
+   но без полумегабайта JS в критическом пути. */
+.hero-card-body {
   position: absolute;
   inset: 19% 5%;
-  border: 1px solid rgba(181, 242, 60, 0.18);
+  border: 1px solid rgba(216, 249, 140, 0.24);
   border-radius: 24px;
-  background: linear-gradient(145deg, #151c18, #0d120f);
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+  background:
+    radial-gradient(120% 90% at 85% 105%, rgba(181, 242, 60, 0.1), transparent 42%),
+    linear-gradient(150deg, #161c18 0%, #0e130f 50%, #090d0b 100%);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.5),
+    inset 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 -1px rgba(0, 0, 0, 0.45);
+}
+
+.hero-card-body::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(118deg, transparent 34%, rgba(255, 255, 255, 0.05) 46%, transparent 60%);
   content: "";
 }
 
@@ -628,7 +685,7 @@ button:focus-visible {
 .hero-card-glint {
   position: absolute;
   z-index: 4;
-  inset: 20% 5%;
+  inset: 19% 5%;
   overflow: hidden;
   border-radius: 24px;
   pointer-events: none;
@@ -2170,7 +2227,8 @@ button:focus-visible {
     width: 38px;
   }
 
-  .hero-card-glint {
+  .hero-card-glint,
+  .hero-card-body {
     border-radius: 16px;
   }
 
@@ -2313,6 +2371,7 @@ button:focus-visible {
   *::before,
   *::after {
     scroll-behavior: auto !important;
+    animation-delay: 0s !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
