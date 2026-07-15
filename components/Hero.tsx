@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { SignalArcs } from "@/components/Arcs";
 import { Eyebrow } from "@/components/Eyebrow";
 import { HeroCard } from "@/components/HeroCard";
 import { LeadButton } from "@/components/LeadButton";
@@ -13,6 +14,7 @@ export function Hero() {
 
   return (
     <section id="top" className="hero dark-section">
+      <SignalArcs className="hero-arcs" />
       <div className="site-container">
         <div className="hero-fade-up">
           <Eyebrow>NFC-КАРТЫ · ОТЗЫВЫ · 2GIS</Eyebrow>

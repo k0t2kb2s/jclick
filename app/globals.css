@@ -125,33 +125,52 @@ body {
   }
 }
 
-/* ---------- CTA: тонкие NFC-дуги как «волны касания» ---------- */
+/* ---------- NFC-дуги: «волны касания» в хиро и финальном CTA ---------- */
 
-.cta-arcs {
+.cta-arcs,
+.hero-arcs {
   position: absolute;
-  top: 50%;
-  right: min(-160px, -12vw);
-  width: clamp(420px, 46vw, 720px);
   aspect-ratio: 1;
-  transform: translateY(-50%);
   pointer-events: none;
 }
 
-.cta-arcs svg {
+.cta-arcs {
+  top: 50%;
+  right: min(-160px, -12vw);
+  width: clamp(420px, 46vw, 720px);
+  transform: translateY(-50%);
+}
+
+/* В хиро дуги расходятся от NFC-карты справа */
+.hero-arcs {
+  top: 96px;
+  right: max(-360px, -24vw);
+  width: clamp(680px, 62vw, 1060px);
+}
+
+.cta-arcs svg,
+.hero-arcs svg {
   width: 100%;
   height: 100%;
 }
 
-.cta-arcs circle {
+.cta-arcs circle,
+.hero-arcs circle {
   fill: none;
   stroke: rgba(255, 255, 255, 0.055);
   stroke-width: 1;
 }
 
-.cta-arcs .arc-accent {
+.cta-arcs .arc-accent,
+.hero-arcs .arc-accent {
   stroke: rgba(181, 242, 60, 0.28);
   stroke-dasharray: 120 1400;
   stroke-linecap: round;
+}
+
+.hero-arcs .arc-accent {
+  stroke-dasharray: 90 1400;
+  stroke-dashoffset: -420;
 }
 
 /* ---------- Custom cursor ---------- */
@@ -347,6 +366,28 @@ button:focus-visible {
 .section-marker b {
   color: var(--lime);
   font-weight: 700;
+}
+
+/* Гигантский контурный номер секции - редакционный «водяной знак»,
+   продолжает нумерацию маркеров. Лежит за контентом контейнера. */
+.section-ghost {
+  position: absolute;
+  z-index: -1;
+  top: -44px;
+  right: -8px;
+  color: transparent;
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: clamp(150px, 19vw, 270px);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.055);
+  pointer-events: none;
+  user-select: none;
+}
+
+.light-section .section-ghost {
+  -webkit-text-stroke-color: rgba(10, 14, 12, 0.08);
 }
 
 .section-marker-line {
@@ -2273,6 +2314,11 @@ button:focus-visible {
     padding: 112px 0 84px;
   }
 
+  /* На мобильном карта уходит под текст - дуги за ней только мешают */
+  .hero-arcs {
+    display: none;
+  }
+
   /* Мобильный порядок: сначала сообщение и кнопки, карта — после */
   .hero-row {
     display: flex;
@@ -2372,6 +2418,11 @@ button:focus-visible {
   .section-marker {
     margin-bottom: 30px;
     font-size: 0.6rem;
+  }
+
+  .section-ghost {
+    top: -26px;
+    font-size: 104px;
   }
 
   .lead-overlay {
