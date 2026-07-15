@@ -41,14 +41,19 @@ export function Stat() {
       </div>
       <div className="site-container stat-inner" ref={ref}>
         <Reveal>
-          <Eyebrow>ЭФФЕКТ</Eyebrow>
-          <div className="stat-number" aria-label="+40%">
+          <Eyebrow>РЕЗУЛЬТАТ</Eyebrow>
+          <div className="stat-number" aria-label="до +40%">
+            <span className="stat-upto" aria-hidden="true">
+              до
+            </span>
             +<motion.span aria-hidden="true">{rounded}</motion.span>%
           </div>
-          <p className="stat-caption">свежих отзывов за первый месяц с картой</p>
+          <p className="stat-caption">
+            новых отзывов за первый месяц использования
+          </p>
           <p className="stat-text">
-            Свежие отзывы поднимают карточку в поиске 2GIS. Выше карточка —
-            больше новых гостей.
+            Регулярные свежие отзывы повышают рейтинг карточки в поиске 2GIS.
+            Выше позиция в выдаче - больше новых гостей.
           </p>
         </Reveal>
       </div>

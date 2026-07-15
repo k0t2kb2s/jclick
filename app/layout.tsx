@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { CursorFX } from "@/components/CursorFX";
 import { LenisProvider } from "@/components/LenisProvider";
 import { LeadModalProvider } from "@/components/LeadModal";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -8,7 +9,7 @@ import "./globals.css";
 
 const title = "jclick — NFC-карты для отзывов на 2GIS";
 const description =
-  "NFC-карты, которые превращают каждого гостя в свежий отзыв на 2GIS. Без приложений. Быстрее QR.";
+  "NFC-карты для сбора отзывов в 2GIS. Работают без установки приложений. Быстрее и удобнее QR-кодов.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://j-click.app"),
@@ -52,12 +53,20 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
+        <div className="site-backdrop" aria-hidden="true">
+          <div className="backdrop-glow" />
+          <div className="backdrop-grid" />
+          <div id="backdrop-torch" className="backdrop-torch">
+            <div className="backdrop-torch-grid" />
+          </div>
+        </div>
         <LenisProvider>
           <LeadModalProvider>
             <ScrollProgress />
             {children}
           </LeadModalProvider>
         </LenisProvider>
+        <CursorFX />
       </body>
     </html>
   );

@@ -3,17 +3,17 @@ import { Reveal } from "@/components/Motion";
 import { SectionMarker } from "@/components/SectionMarker";
 
 const qrItems = [
-  "Достать и открыть камеру",
-  "Навести, поймать фокус",
+  "Достать телефон, открыть камеру",
+  "Навести и поймать фокус",
+  "Бумажные наклейки быстро изнашиваются",
   "Часть гостей бросает на полпути",
-  "Выцветает, мнётся, теряется",
 ];
 
 const jclickItems = [
-  "Просто приложить телефон",
-  "Без приложений и камеры",
-  "Открывается за долю секунды",
-  "Солидно выглядит на столе",
+  "Достаточно приложить телефон",
+  "Ссылка открывается без лишних действий",
+  "Износостойкая карта",
+  "Аккуратно смотрится на столе",
 ];
 
 export function Comparison() {
@@ -22,10 +22,10 @@ export function Comparison() {
       <div className="site-container">
         <SectionMarker index="04" label="JCLICK VS QR" />
         <Reveal className="section-heading">
-          <h2 className="section-title">Почему jclick проще QR-кода</h2>
+          <h2 className="section-title">Почему NFC-карта эффективнее QR-кода</h2>
         </Reveal>
         <Reveal>
-          <div className="vs-panel">
+          <div className="vs-panel" data-glow>
             <div className="vs-side vs-side-qr">
               <h3>QR-код</h3>
               <ul className="vs-list">

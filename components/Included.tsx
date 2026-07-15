@@ -22,48 +22,54 @@ export function Included() {
       <div className="site-container">
         <SectionMarker index="06" label="ЧТО ВХОДИТ" />
         <Reveal className="section-heading section-heading-wide">
-          <h2 className="section-title">Всё для запуска с первого дня</h2>
+          <h2 className="section-title">Что входит в услугу</h2>
           <p className="section-subtitle">
-            Карта, настройка, дизайн и документы. Можно сразу ставить на стол.
+            Карта, дизайн, настройка и документы. Можно сразу ставить на стол.
           </p>
         </Reveal>
         <Stagger className="bento-grid">
-          <StaggerItem className="bento-card bento-card-design">
+          <StaggerItem className="bento-card bento-card-design" glow>
             <CardPreview />
             <div>
               <h3>
-                Уникальный дизайн под бренд
+                Индивидуальный дизайн под бренд
                 <span className="lime-badge">бесплатно</span>
               </h3>
               <p>
-                Оформим карту в стиле вашего заведения. Дизайн бесплатный при
+                Оформим карту в фирменном стиле вашего бренда. Бесплатно при
                 любом заказе.
               </p>
             </div>
           </StaggerItem>
-          <StaggerItem className="bento-card">
+          <StaggerItem className="bento-card" glow>
             <span className="bento-icon" aria-hidden="true">
               <Sticker size={22} strokeWidth={1.8} />
             </span>
-            <h3>Самоклеящийся ПВХ-пластик</h3>
-            <p>Прочная карта, которая клеится на стол или стойку и не мнётся.</p>
+            <h3>ПВХ-пластик на самоклеящейся основе</h3>
+            <p>
+              Прочная карта, которая клеится на стол или стойку и не
+              изнашивается.
+            </p>
           </StaggerItem>
-          <StaggerItem className="bento-card">
+          <StaggerItem className="bento-card" glow>
             <span className="bento-icon" aria-hidden="true">
               <ShieldCheck size={22} strokeWidth={1.8} />
             </span>
-            <h3>Настройка и гарантия</h3>
-            <p>Пропишем вашу ссылку 2GIS. Если будет брак — бесплатно заменим.</p>
+            <h3>Техническая настройка и гарантия</h3>
+            <p>
+              Сами запрограммируем нужные ссылки. Брак подлежит бесплатной
+              замене.
+            </p>
           </StaggerItem>
-          <StaggerItem className="bento-card bento-card-wide">
+          <StaggerItem className="bento-card bento-card-wide" glow>
             <span className="bento-icon" aria-hidden="true">
               <FileCheck2 size={22} strokeWidth={1.8} />
             </span>
             <div>
-              <h3>Документы для бизнеса</h3>
+              <h3>Работа по договору</h3>
               <p>
-                Работаем по договору, даём закрывающие документы для
-                бухгалтерии.
+                Полный пакет закрывающих документов для бухгалтерии при любом
+                заказе.
               </p>
             </div>
           </StaggerItem>

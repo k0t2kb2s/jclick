@@ -9,17 +9,17 @@ const demoSteps = [
   {
     number: "1",
     title: "Подносит телефон",
-    text: "Без приложений, без наведения камеры.",
+    text: "К карте на столе. Без приложений и камеры.",
   },
   {
     number: "2",
     title: "Открывается 2GIS",
-    text: "Быстрее, чем достать и открыть камеру.",
+    text: "Профиль заведения открывается мгновенно.",
   },
   {
     number: "3",
-    title: "Отзыв за 30 секунд",
-    text: "Пока гость сидит у вас, а не когда уйдёт.",
+    title: "Отзыв на месте",
+    text: "Пока впечатления от визита ещё свежие.",
   },
 ];
 
@@ -89,7 +89,7 @@ export function Demo() {
         <SectionMarker index="03" label="ЖИВОЕ ДЕМО" />
         <Reveal className="section-heading section-heading-wide">
           <h2 className="section-title light-title">
-            Один тап — и страница отзыва уже открыта
+            Один тап - и страница отзыва уже открыта
           </h2>
         </Reveal>
         <div className="demo-grid">

@@ -18,9 +18,9 @@ const plans: readonly Plan[] = [
     price: "3 000 ₸",
     suffix: "за карту",
     features: [
-      "Нейтральная карта из стока",
-      "Прошивка на месте за 30 сек",
-      "Гарантия на брак",
+      "Стандартный дизайн",
+      "Настройка на месте",
+      "Гарантия замены",
     ],
   },
   {
@@ -29,8 +29,8 @@ const plans: readonly Plan[] = [
     suffix: "за карту",
     popular: true,
     features: [
-      "Всё из базового пакета",
-      "Комплект + табличка на стол",
+      "Условия базового пакета",
+      "Настольная табличка в комплекте",
       "Закрывающие документы",
     ],
   },
@@ -38,9 +38,9 @@ const plans: readonly Plan[] = [
     range: "50+ карт",
     price: "договорная",
     features: [
-      "Кастом с вашим логотипом",
-      "Предоплата 30–50%, срок 8–20 дней",
+      "Индивидуальный дизайн с вашим логотипом",
       "Договор поставки",
+      "Предоплата 30-50%, срок 8-20 дней",
     ],
   },
 ];
@@ -51,9 +51,11 @@ export function Pricing() {
       <div className="site-container">
         <SectionMarker index="07" label="ЦЕНЫ" />
         <Reveal className="section-heading section-heading-wide">
-          <h2 className="section-title">Платите один раз. Без подписки</h2>
+          <h2 className="section-title">
+            Разовая оплата - без абонентских подписок
+          </h2>
           <p className="section-subtitle">
-            Окупается благодаря первым гостям, которых приведут новые отзывы.
+            Окупается с первых клиентов, пришедших благодаря свежим отзывам.
           </p>
         </Reveal>
         <Stagger className="pricing-grid">
@@ -61,8 +63,11 @@ export function Pricing() {
             <StaggerItem
               className={`pricing-card ${plan.popular ? "pricing-card-popular" : ""}`}
               key={plan.range}
+              glow
             >
-              {plan.popular && <span className="popular-pill">популярно</span>}
+              {plan.popular && (
+                <span className="popular-pill">оптимальный пакет</span>
+              )}
               <p className="plan-range">{plan.range}</p>
               <p className="plan-price">
                 {plan.price}

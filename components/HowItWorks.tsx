@@ -5,17 +5,17 @@ const steps = [
   {
     number: "01",
     title: "Гость подносит телефон",
-    text: "Карта на столе рядом с табличкой «оставьте отзыв». Тап — и всё.",
+    text: "К NFC-карте на столе или стойке. Без приложений и камеры.",
   },
   {
     number: "02",
-    title: "Открывается ваша страница",
-    text: "Сразу 2GIS, Google или что настроите: WiFi, меню, соцсети.",
+    title: "Открывается ваш профиль",
+    text: "На экране мгновенно открывается профиль заведения в 2GIS, Google или другая заданная ссылка.",
   },
   {
     number: "03",
-    title: "Отзыв за 30 секунд",
-    text: "Человек пишет прямо у вас, пока сидит. Дома он не вспоминает.",
+    title: "Отзыв пишется на месте",
+    text: "Клиент оставляет отзыв сразу, пока впечатления от визита ещё свежие.",
   },
 ];
 
@@ -25,7 +25,7 @@ export function HowItWorks() {
       <div className="site-container">
         <SectionMarker index="02" label="КАК РАБОТАЕТ" />
         <Reveal className="section-heading">
-          <h2 className="section-title">От касания до отзыва за 30 секунд</h2>
+          <h2 className="section-title">Весь процесс занимает не более 30 секунд</h2>
         </Reveal>
         <Stagger className="steps-list">
           {steps.map((step) => (

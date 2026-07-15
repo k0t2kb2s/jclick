@@ -67,15 +67,174 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Плёночное зерно поверх всего — убирает «пластиковую» гладкость тёмных заливок */
+/* ---------- Site backdrop: чертёжная сетка + дрейфующий лаймовый свет ---------- */
+
+.site-backdrop {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backdrop-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(130% 100% at 50% 0%, black 35%, transparent 85%);
+}
+
+.backdrop-glow {
+  position: absolute;
+  top: -32%;
+  left: 50%;
+  width: min(1100px, 95vw);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(181, 242, 60, 0.075), transparent 62%);
+  filter: blur(30px);
+  animation: backdrop-drift 26s ease-in-out infinite alternate;
+}
+
+@keyframes backdrop-drift {
+  from {
+    transform: translate3d(-72%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-28%, 9%, 0) scale(1.18);
+  }
+}
+
+/* «Фонарик»: круг, внутри — та же сетка лаймом. Двигается только transform,
+   внутренний слой сдвигается в противофазе, чтобы сетка не «ехала». */
+.backdrop-torch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(181, 242, 60, 0.05), transparent 68%);
+  mask-image: radial-gradient(circle closest-side, black, transparent 74%);
+  opacity: 0;
+  transition: opacity 500ms ease;
+  will-change: transform;
+}
+
+.torch-on .backdrop-torch {
+  opacity: 1;
+}
+
+.backdrop-torch-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image:
+    linear-gradient(rgba(181, 242, 60, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181, 242, 60, 0.12) 1px, transparent 1px);
+  background-size: 44px 44px;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-glow,
+  .backdrop-torch {
+    display: none;
+  }
+}
+
+/* ---------- Custom cursor ---------- */
+
+html.has-cursor-fx body {
+  cursor: none;
+}
+
+html.has-cursor-fx :is(a, button, [role="button"], label) {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  z-index: 130;
+  top: -3px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  z-index: 130;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(181, 242, 60, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transition:
+    opacity 300ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.cursor-ring.is-active {
+  border-color: rgba(181, 242, 60, 0.9);
+  background: rgba(181, 242, 60, 0.08);
+}
+
+/* ---------- Magnetic CTA ---------- */
+
+.magnetic {
+  display: inline-flex;
+  will-change: transform;
+}
+
+/* ---------- Cursor glow на карточках ---------- */
+
+[data-glow]::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(181, 242, 60, 0.14),
+    transparent 65%
+  );
+  content: "";
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-glow]:hover::after {
+    opacity: 1;
+  }
+}
+
+/* Плёночное зерно поверх всего — убирает «пластиковую» гладкость тёмных заливок.
+   Обычная прозрачность вместо mix-blend-mode: блендинг поверх fixed-фона
+   ломает композитинг (чёрные области при скролле) на части GPU. */
 body::after {
   position: fixed;
   z-index: 90;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   content: "";
-  mix-blend-mode: overlay;
-  opacity: 0.05;
+  opacity: 0.04;
   pointer-events: none;
 }
 
@@ -105,7 +264,8 @@ button:focus-visible {
 .dark-section {
   position: relative;
   overflow: clip;
-  background: var(--bg);
+  /* Прозрачно: фоновая сетка и свет видны сквозь тёмные секции */
+  background: transparent;
   color: var(--text);
 }
 
@@ -185,6 +345,27 @@ button:focus-visible {
   flex: 1;
   height: 1px;
   background: var(--hairline);
+}
+
+/* Прогрессив: линия маркера растёт при входе секции (без JS) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-marker-line {
+      transform-origin: left center;
+      animation: marker-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 55%;
+    }
+  }
+}
+
+@keyframes marker-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .light-section .section-marker {
@@ -1229,6 +1410,15 @@ button:focus-visible {
   line-height: 0.8;
 }
 
+/* Честное «до» у большой цифры — мелко, у базовой линии, как валютный знак */
+.stat-upto {
+  margin-right: 0.14em;
+  color: var(--muted);
+  font-size: 0.3em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 .stat-caption {
   max-width: 620px;
   margin: 40px auto 0;
@@ -1604,7 +1794,7 @@ button:focus-visible {
 
 .site-footer {
   border-top: 1px solid var(--hairline);
-  background: var(--bg);
+  background: transparent;
   color: var(--muted);
 }
 
@@ -2308,6 +2498,11 @@ button:focus-visible {
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .hero-actions .magnetic,
+  .cta-inner .magnetic {
+    width: 100%;
   }
 
   .primary-button,

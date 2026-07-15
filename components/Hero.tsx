@@ -2,8 +2,9 @@ import { Fragment } from "react";
 import { Eyebrow } from "@/components/Eyebrow";
 import { HeroCard } from "@/components/HeroCard";
 import { LeadButton } from "@/components/LeadButton";
+import { Magnetic } from "@/components/Magnetic";
 
-const headline = "Гость тапнул — оставил отзыв.";
+const headline = "Касание смартфона - и отзыв готов.";
 
 /* Вход героя сделан на CSS-анимациях: контент виден сразу после первой
    отрисовки, не дожидаясь гидрации JS-бандла. */
@@ -38,15 +39,19 @@ export function Hero() {
         <div className="hero-row">
           <div className="hero-copy">
             <p className="hero-subtitle hero-fade-up hero-delay-copy">
-              NFC-карты, которые превращают каждого гостя в свежий отзыв на
-              2GIS. Без приложений. Быстрее QR.
+              NFC-карты для сбора отзывов в 2GIS. Работают без установки
+              приложений. Быстрее и удобнее QR-кодов.
             </p>
             <div className="hero-fade-up hero-delay-actions">
               <div className="hero-actions">
-                <LeadButton arrow />
-                <a className="ghost-button" href="#pricing">
-                  Смотреть цены
-                </a>
+                <Magnetic>
+                  <LeadButton arrow />
+                </Magnetic>
+                <Magnetic>
+                  <a className="ghost-button" href="#pricing">
+                    Смотреть цены
+                  </a>
+                </Magnetic>
               </div>
               <p className="hero-trust">
                 Без подписки · Настройка за 30 секунд · Гарантия замены
